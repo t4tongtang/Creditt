@@ -47,15 +47,15 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* เพื่อไม่ให้บังการคลิกหรือกดปุ่มบนหน้าเว็บ */
+    pointer-events: none;
     overflow: hidden;
-    z-index: 0; /* อยู่หลังสุด */
+    z-index: 0;
   }
 
   .floating-item {
     position: absolute;
-    bottom: -150px; /* ขยับจุดเริ่มลอยลงไปเผื่อรองรับขนาดรูปที่ใหญ่ขึ้น 2 เท่า */
-    opacity: 0.3;   /* ปรับความจางของรูปภาพ */
+    bottom: -250px; /* ปรับจุดเริ่มลอยลงไปอีกเพื่อรองรับขนาดรูปที่ขยายใหญ่ขึ้น */
+    opacity: 0.3;
     animation: floatUp linear infinite;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
   }
@@ -72,7 +72,7 @@
       opacity: 0.32;
     }
     100% {
-      transform: translateY(-125vh) rotate(20deg);
+      transform: translateY(-135vh) rotate(20deg);
       opacity: 0;
     }
   }
@@ -498,19 +498,18 @@
 </head>
 <body>
 
-<!-- 🌸 ส่วนพื้นหลังไอคอนลอย (ปรับขนาดเพิ่มเป็น 2 เท่าแล้วค่ะ) -->
+<!-- 🌸 ส่วนพื้นหลังไอคอนลอย (ขยายขนาดขึ้นอีก 1 เท่าตัวเรียบร้อยค่ะ) -->
 <div class="floating-bg-container">
-  <img src="ไม่มีชื่อ 111_20251130233923.png" class="floating-item" style="left: 4%; width: 90px; animation-duration: 14s; animation-delay: 0s;">
-  <img src="ไม่มีชื่อ 111_20251130233930.png" class="floating-item" style="left: 16%; width: 76px; animation-duration: 11s; animation-delay: 4s;">
-  <img src="```html
-  <img src="ไม่มีชื่อ 111_20251130233934.png" class="floating-item" style="left: 28%; width: 70px; animation-duration: 16s; animation-delay: 2s;">
-  <img src="ไม่มีชื่อ 111_20251130233938.png" class="floating-item" style="left: 40%; width: 80px; animation-duration: 13s; animation-delay: 7s;">
-  <img src="ไม่มีชื่อ 335_20260402161126.png" class="floating-item" style="left: 52%; width: 96px; animation-duration: 15s; animation-delay: 1s;">
-  <img src="ไม่มีชื่อ 335_20260402161316.png" class="floating-item" style="left: 64%; width: 72px; animation-duration: 12s; animation-delay: 5s;">
-  <img src="ไม่มีชื่อ 335_20260402170103.png" class="floating-item" style="left: 75%; width: 80px; animation-duration: 14s; animation-delay: 3s;">
-  <img src="ไม่มีชื่อ 3770_20250924213138.png" class="floating-item" style="left: 85%; width: 90px; animation-duration: 17s; animation-delay: 8s;">
-  <img src="ไม่มีชื่อ 3770_20250924213810.png" class="floating-item" style="left: 92%; width: 76px; animation-duration: 10s; animation-delay: 6s;">
-  <img src="ไม่มีชื่อ 3770_20250924215845.png" class="floating-item" style="left: 33%; width: 88px; animation-duration: 13s; animation-delay: 10s;">
+  <img src="ไม่มีชื่อ 111_20251130233923.png" class="floating-item" style="left: 4%; width: 180px; animation-duration: 14s; animation-delay: 0s;">
+  <img src="ไม่มีชื่อ 111_20251130233930.png" class="floating-item" style="left: 16%; width: 152px; animation-duration: 11s; animation-delay: 4s;">
+  <img src="ไม่มีชื่อ 111_20251130233934.png" class="floating-item" style="left: 28%; width: 140px; animation-duration: 16s; animation-delay: 2s;">
+  <img src="ไม่มีชื่อ 111_20251130233938.png" class="floating-item" style="left: 40%; width: 160px; animation-duration: 13s; animation-delay: 7s;">
+  <img src="ไม่มีชื่อ 335_20260402161126.png" class="floating-item" style="left: 52%; width: 192px; animation-duration: 15s; animation-delay: 1s;">
+  <img src="ไม่มีชื่อ 335_20260402161316.png" class="floating-item" style="left: 64%; width: 144px; animation-duration: 12s; animation-delay: 5s;">
+  <img src="ไม่มีชื่อ 335_20260402170103.png" class="floating-item" style="left: 75%; width: 160px; animation-duration: 14s; animation-delay: 3s;">
+  <img src="ไม่มีชื่อ 3770_20250924213138.png" class="floating-item" style="left: 85%; width: 180px; animation-duration: 17s; animation-delay: 8s;">
+  <img src="ไม่มีชื่อ 3770_20250924213810.png" class="floating-item" style="left: 92%; width: 152px; animation-duration: 10s; animation-delay: 6s;">
+  <img src="ไม่มีชื่อ 3770_20250924215845.png" class="floating-item" style="left: 33%; width: 176px; animation-duration: 13s; animation-delay: 10s;">
 </div>
 
 <nav class="nav">
@@ -590,7 +589,7 @@
       </div>
       
       <div>
-        <a class="line-link-btn" href="[https://linevoom.line.me/post/1166428808429267751](https://linevoom.line.me/post/1166428808429267751)" target="_blank">
+        <a class="line-link-btn" href="https://linevoom.line.me/post/1166428808429267751" target="_blank">
           💚 ดูบอร์ดเครดิตเดิมบน Line Voom
         </a>
       </div>
@@ -671,7 +670,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyCvGQ0xBtvJL4vlZsLlEnRxK-7mM0EAG20",
     authDomain: "tfour-credit.firebaseapp.com",
-    databaseURL: "[https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app](https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app)",
+    databaseURL: "https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "tfour-credit",
     storageBucket: "tfour-credit.firebasestorage.app",
     messagingSenderId: "741580877981",
