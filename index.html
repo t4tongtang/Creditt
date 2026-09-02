@@ -87,17 +87,55 @@
 
   .hero-text{padding:70px 20px 0;}
   .hero-name{font-size:32px; color: #E07A5F; letter-spacing: 0.5px;}
-  .hero-tag{margin-top:8px; color:var(--ink-soft); font-size:15px; max-width:48ch; margin-left:auto; margin-right:auto;}
-  .hero-stats{margin-top:18px; display:flex; justify-content: center; gap:16px;}
+  .hero-tag{margin-top:8px; color:var(--ink-soft); font-size:15px; max-width:52ch; margin-left:auto; margin-right:auto; word-break: break-word;}
+  
+  /* กล่องสถิติ + ปุ่มกดถูกใจร้าน */
+  .hero-stats{
+    margin-top:18px; 
+    display:flex; 
+    justify-content: center; 
+    align-items: center;
+    gap:12px;
+    flex-wrap: wrap;
+  }
   .stat{
     background: rgba(255, 255, 255, 0.9); 
-    padding: 8px 22px; 
+    padding: 8px 18px; 
     border-radius: 30px;
     border: 1.5px solid #FFE3EA;
     box-shadow: 0 4px 12px rgba(255, 179, 198, 0.15);
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
-  .stat b{font-size:20px; color:#FF7B9C;}
+  .stat b{font-size:18px; color:#FF7B9C;}
   .stat span{font-size:13px; color:var(--ink-soft);}
+
+  /* ปุ่มกดถูกใจร้านค้า */
+  .shop-like-btn {
+    background: linear-gradient(135deg, #FFF0F3 0%, #FFE3EA 100%);
+    border: 1.5px solid #FFCCD5;
+    padding: 8px 18px;
+    border-radius: 30px;
+    color: #FF7B9C;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 123, 156, 0.15);
+    transition: all 0.2s ease;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .shop-like-btn:hover {
+    transform: translateY(-2px) scale(1.03);
+    background: #FF7B9C;
+    color: white;
+    border-color: #FF7B9C;
+  }
+  .shop-like-btn.liked {
+    background: #FF7B9C;
+    color: white;
+    border-color: #FF7B9C;
+  }
 
   /* REVIEWS SECTION */
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
@@ -251,10 +289,13 @@
   </div>
   <div class="hero-text">
     <h1 class="hero-name">Tfour ʚ♡⃛ɞ</h1>
-    <p class="hero-tag">รวมเครดิตและรีวิวความประทับใจจากลูกค้า ขอบคุณทุกคำสั่งซื้อน้า 🌸</p>
+    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
     <div class="hero-stats">
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
+      <button class="shop-like-btn" id="shopLikeBtn">
+        <span id="shopHeartIcon">💖</span> ถูกใจร้าน (<b id="shopLikeCount">0</b>)
+      </button>
     </div>
   </div>
 </div>
@@ -313,7 +354,7 @@
 
 <script>
   const ADMIN_PASS = "1234";
-  const COOLDOWN_TIME = 3 * 60 * 1000; // คูลดาวน์ 3 นาที
+  const COOLDOWN_TIME = 10 * 60 * 1000; // คูลดาวน์ 10 นาที
   const PAGE_SIZE = 5; // แสดงทีละ 5 รีวิว
 
   let visibleCount = PAGE_SIZE;
@@ -328,6 +369,38 @@
   const starPick = document.getElementById('starPick');
   const statCount = document.getElementById('statCount');
   const statAvg = document.getElementById('statAvg');
+  const shopLikeBtn = document.getElementById('shopLikeBtn');
+  const shopLikeCount = document.getElementById('shopLikeCount');
+  const shopHeartIcon = document.getElementById('shopHeartIcon');
+
+  // โหลดระบบถูกใจร้าน
+  let storeLikes = Number(localStorage.getItem('tfour_store_likes')) || 0;
+  let isStoreLiked = localStorage.getItem('tfour_store_liked_by_user') === 'true';
+
+  function updateShopLikeUI() {
+    shopLikeCount.textContent = storeLikes;
+    if (isStoreLiked) {
+      shopLikeBtn.classList.add('liked');
+      shopHeartIcon.textContent = '💖';
+    } else {
+      shopLikeBtn.classList.remove('liked');
+      shopHeartIcon.textContent = '♡';
+    }
+  }
+
+  shopLikeBtn.addEventListener('click', () => {
+    if (isStoreLiked) {
+      storeLikes = Math.max(0, storeLikes - 1);
+      isStoreLiked = false;
+      localStorage.setItem('tfour_store_liked_by_user', 'false');
+    } else {
+      storeLikes += 1;
+      isStoreLiked = true;
+      localStorage.setItem('tfour_store_liked_by_user', 'true');
+    }
+    localStorage.setItem('tfour_store_likes', storeLikes);
+    updateShopLikeUI();
+  });
 
   // โหลดข้อมูลรีวิว
   let reviews = JSON.parse(localStorage.getItem('tfour_reviews_v2')) || [
@@ -391,7 +464,7 @@
     localStorage.setItem('tfour_reviews_v2', JSON.stringify(reviews));
   }
 
-  // ระบบกด Like / ถูกใจ
+  // ระบบกด Like / ถูกใจ การ์ดรีวิว
   function toggleLike(index) {
     const rv = reviews[index];
     const likedKey = `liked_${rv.id}`;
@@ -444,14 +517,16 @@
     }
   });
 
-  // บันทึกรีวิวใหม่ (มีคูลดาวน์ + บันทึกเวลาปัจจุบัน)
+  // บันทึกรีวิวใหม่ (คูลดาวน์ 10 นาที)
   submitBtn.addEventListener('click', () => {
     const lastPostTime = localStorage.getItem('last_review_time');
     const now = Date.now();
 
     if (lastPostTime && (now - lastPostTime < COOLDOWN_TIME)) {
-      const remainingSec = Math.ceil((COOLDOWN_TIME - (now - lastPostTime)) / 1000);
-      alert(`คุณส่งรีวิวเร็วเกินไปน้า กรุณารออีก ${remainingSec} วินาทีค่ะ 🌸`);
+      const remainingDiff = COOLDOWN_TIME - (now - lastPostTime);
+      const remainingMin = Math.floor(remainingDiff / 60000);
+      const remainingSec = Math.ceil((remainingDiff % 60000) / 1000);
+      alert(`คุณส่งรีวิวเร็วเกินไปน้า กรุณารออีก ${remainingMin} นาที ${remainingSec} วินาทีค่ะ 🌸`);
       return;
     }
 
@@ -501,6 +576,7 @@
     }
   });
 
+  updateShopLikeUI();
   renderReviews();
 </script>
 
