@@ -25,7 +25,6 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   
-  /* ลายตารางพาสเทล */
   body{
     margin:0;
     background-color: #FFF2F5;
@@ -101,7 +100,7 @@
     max-width:55ch; margin-left:auto; margin-right:auto; 
     word-break: break-word;
     background: rgba(255, 255, 255, 0.85);
-    padding: 6px 18px;
+    padding: 8px 18px;
     border-radius: 20px;
     display: inline-block;
     border: 1.5px dashed #FFCCD5;
@@ -151,7 +150,7 @@
 
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
 
-  /* ------------------ ดีไซน์ปุ่ม Plus One & Minus One สไตล์ตามรูป ------------------ */
+  /* ------------------ ดีไซน์ปุ่ม Plus One & Minus One ------------------ */
   .vote-cards-wrapper {
     display: flex;
     gap: 16px;
@@ -193,7 +192,6 @@
     transform: scale(0.98);
   }
 
-  /* ปุ่มตัวเลขสีชมพูละมุน */
   .badge-icon {
     width: 52px;
     height: 52px;
@@ -211,7 +209,6 @@
     box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 4px 10px rgba(255, 92, 138, 0.15);
   }
   
-  /* ไอคอนเล็กๆ มุมขวาบนของ badge */
   .badge-icon::before {
     position: absolute;
     top: -5px;
@@ -248,7 +245,6 @@
     font-weight: 500;
   }
 
-  /* เมื่อกด Plus One แล้ว */
   .vote-card.voted {
     border-color: #FF85A1;
     background: #FFF5F7;
@@ -420,6 +416,8 @@
     border-radius:26px; padding:24px; 
     box-shadow:0 15px 35px rgba(255, 123, 156, 0.3);
     border: 2px solid #FFE3EA;
+    max-height: 85vh;
+    overflow-y: auto;
   }
   .modal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
   .modal-close{background:none; border:none; font-size:24px; cursor:pointer; color:var(--ink-soft);}
@@ -432,6 +430,20 @@
   .field textarea{resize:vertical; min-height:85px;}
   .star-pick{display:flex; gap:8px; font-size:26px; cursor:pointer; color:#E2D9D5;}
   .star-pick span.active{color:#FFB703;}
+
+  /* การ์ดรายการลบสำหรับแอดมิน */
+  .report-item {
+    background: #FFFBFD;
+    border: 1px solid #FFCCD5;
+    border-radius: 16px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .report-item-head { display: flex; justify-content: space-between; align-items: center; }
+  .report-item-title { font-weight: bold; color: #E07A5F; }
+  .report-item-time { font-size: 11px; color: #A08C85; }
+  .report-item-msg { font-size: 13px; color: #5A4A42; margin-top: 6px; }
+  .report-item-link { font-size: 12px; color: #FF5C8A; word-break: break-all; display: block; margin-top: 4px; }
 
   .heart-sparkle {
     position: fixed; pointer-events: none; font-size: 15px;
@@ -458,7 +470,7 @@
   </div>
   <div class="hero-text">
     <h1 class="hero-name">Tfour ʚ♡⃛ɞ</h1>
-    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ <br> ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
+    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚<br>ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
     <div class="hero-stats">
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
@@ -471,7 +483,7 @@
 
 <div class="main-container">
 
-  <!-- 🌸 การ์ดปุ่ม Plus one & Minus one สไตล์ตามภาพที่แนบ -->
+  <!-- 🌸 การ์ดปุ่ม Plus one & Minus one -->
   <div class="vote-cards-wrapper">
     <div class="vote-card" id="plusOneCard">
       <div class="badge-icon badge-plus">+1</div>
@@ -583,12 +595,23 @@
   </div>
 </div>
 
+<!-- Modal สำหรับแอดมินตรวจดูรายงาน Minus One -->
+<div class="overlay" id="adminReportsOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 style="color: #E07A5F;">📑 รายงาน Minus One (แอดมิน)</h3>
+      <button class="modal-close" id="closeAdminReportsBtn">×</button>
+    </div>
+    <div id="adminReportsList">กำลังโหลดข้อมูล...</div>
+  </div>
+</div>
+
 <footer style="text-align: center; padding: 25px; color: #8C736A; font-size: 13.5px;">
-  made with ♡ · Tfour ʚ♡⃛ɞ
+  made with ♡ · Tfour ʚ♡⃛ɞ<br>
+  <button id="openAdminReportsBtn" style="background:none; border:none; color:#FF9EBB; cursor:pointer; font-size:12px; margin-top:8px; text-decoration:underline;">🔒 ตรวจสอบรายงาน (-1)</button>
 </footer>
 
 <script>
-  // ชุดข้อมูลเชื่อมต่อ Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyCvGQ0xBtvJL4vlZsLlEnRxK-7mM0EAG20",
     authDomain: "tfour-credit.firebaseapp.com",
@@ -623,7 +646,7 @@
   const shopLikeBtn = document.getElementById('shopLikeBtn');
   const shopLikeCount = document.getElementById('shopLikeCount');
 
-  // --- ระบบ Plus One (+1) จำกัด 1 ครั้งต่อเครื่อง ---
+  // --- Plus One (+1) ---
   const plusOneCard = document.getElementById('plusOneCard');
   const plusOneStatus = document.getElementById('plusOneStatus');
 
@@ -652,7 +675,7 @@
     }
   });
 
-  // --- ระบบ Minus One (-1) ส่งหลักฐาน ---
+  // --- Minus One (-1) ---
   const minusOneCard = document.getElementById('minusOneCard');
   const minusOverlay = document.getElementById('minusOverlay');
   const closeMinusBtn = document.getElementById('closeMinusBtn');
@@ -678,7 +701,7 @@
     db.ref('minusReports').push({
       name: name,
       msg: msg,
-      proofLink: link || 'ไม่มีลิงก์',
+      proofLink: link || '',
       time: `${dateStr} ${timeStr}`,
       timestamp: Date.now()
     });
@@ -690,7 +713,69 @@
     minusOverlay.classList.remove('open');
   });
 
-  // --- ระบบกดหัวใจร้านค้า ---
+  // --- ระบบแอดมินดูรายงาน Minus One (-1) ---
+  const openAdminReportsBtn = document.getElementById('openAdminReportsBtn');
+  const adminReportsOverlay = document.getElementById('adminReportsOverlay');
+  const closeAdminReportsBtn = document.getElementById('closeAdminReportsBtn');
+  const adminReportsList = document.getElementById('adminReportsList');
+
+  openAdminReportsBtn.addEventListener('click', () => {
+    const pass = prompt('กรุณากรอกรหัสผ่านแอดมิน:');
+    if (pass === ADMIN_PASS) {
+      adminReportsOverlay.classList.add('open');
+      loadAdminReports();
+    } else if (pass !== null) {
+      alert('รหัสผ่านไม่ถูกต้องค่ะ');
+    }
+  });
+
+  closeAdminReportsBtn.addEventListener('click', () => adminReportsOverlay.classList.remove('open'));
+
+  function loadAdminReports() {
+    db.ref('minusReports').once('value', (snapshot) => {
+      const data = snapshot.val();
+      adminReportsList.innerHTML = '';
+      
+      if (!data) {
+        adminReportsList.innerHTML = '<div style="text-align:center; color:#8C736A; padding:20px;">ไม่มีรายการแจ้งปัญหาเข้ามาค่ะ ✨</div>';
+        return;
+      }
+
+      Object.keys(data).reverse().forEach((key) => {
+        const item = data[key];
+        const div = document.createElement('div');
+        div.className = 'report-item';
+        
+        let linkHTML = '';
+        if (item.proofLink) {
+          linkHTML = `<a href="${item.proofLink}" target="_blank" class="report-item-link">🔗 เปิดดูลิงก์หลักฐาน</a>`;
+        } else {
+          linkHTML = `<span style="font-size:12px; color:#A08C85;">(ไม่มีลิงก์แนบ)</span>`;
+        }
+
+        div.innerHTML = `
+          <div class="report-item-head">
+            <span class="report-item-title">คุณ ${item.name}</span>
+            <button class="icon-btn" onclick="deleteReport('${key}')" title="ลบรายการนี้">🗑️</button>
+          </div>
+          <div class="report-item-time">🕒 ${item.time}</div>
+          <div class="report-item-msg">${item.msg}</div>
+          ${linkHTML}
+        `;
+        adminReportsList.appendChild(div);
+      });
+    });
+  }
+
+  function deleteReport(key) {
+    if (confirm('คุณต้องการลบรายการแจ้งนี้ใช่ไหมคะ?')) {
+      db.ref('minusReports/' + key).remove().then(() => {
+        loadAdminReports();
+      });
+    }
+  }
+
+  // --- ถูกใจร้าน ---
   db.ref('shopLikes').on('value', (snapshot) => {
     const likes = snapshot.val() || 0;
     shopLikeCount.textContent = likes;
@@ -716,7 +801,7 @@
     }
   });
 
-  // --- ดึงข้อมูลรีวิว ---
+  // --- รีวิว ---
   db.ref('reviews').on('value', (snapshot) => {
     const data = snapshot.val();
     reviewsList = [];
