@@ -23,7 +23,6 @@
   body{
     margin:0;
     background-color: var(--paper);
-    /* พื้นหลังลายตารางตารางชมพูอ่อนสบายตา */
     background-image: 
       linear-gradient(to right, rgba(255, 182, 193, 0.2) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255, 182, 193, 0.2) 1px, transparent 1px);
@@ -42,10 +41,10 @@
   }
   button{font-family:inherit;}
   
-  /* NAV แบบใสเบลอมองเห็นด้านหลัง (Glassmorphism) */
+  /* NAV ใสมองเห็นด้านหลัง */
   .nav{
     position:sticky; top:0; z-index:50;
-    background: rgba(255, 255, 255, 0.45);
+    background: rgba(255, 255, 255, 0.55);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 2px dashed rgba(255, 182, 193, 0.7);
@@ -71,7 +70,6 @@
     display: flex; justify-content: center;
   }
   
-  /* รูปโปรไฟล์มีแอนิเมชันดุ๊กดิ๊กลอยนุ่มๆ */
   .profile{
     position:absolute; top:-60px;
     width:120px; height:120px; object-fit:cover;
@@ -88,15 +86,9 @@
   }
 
   .hero-text{padding:70px 20px 0;}
-  .hero-name{
-    font-size:32px; 
-    color: #E07A5F;
-    letter-spacing: 0.5px;
-  }
+  .hero-name{font-size:32px; color: #E07A5F; letter-spacing: 0.5px;}
   .hero-tag{margin-top:8px; color:var(--ink-soft); font-size:15px; max-width:48ch; margin-left:auto; margin-right:auto;}
-  .hero-stats{
-    margin-top:18px; display:flex; justify-content: center; gap:16px;
-  }
+  .hero-stats{margin-top:18px; display:flex; justify-content: center; gap:16px;}
   .stat{
     background: rgba(255, 255, 255, 0.9); 
     padding: 8px 22px; 
@@ -120,23 +112,12 @@
     backdrop-filter: blur(5px);
   }
   .section-head{margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
-  .section-head h2{
-    font-size:22px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #5A4A42;
-  }
+  .section-head h2{font-size:22px; display: flex; align-items: center; gap: 8px; color: #5A4A42;}
   .section-sub{color:var(--ink-soft); font-size:13.5px;}
 
-  .title-icon {
-    width: 34px;
-    height: 34px;
-    object-fit: contain;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
-  }
+  .title-icon {width: 34px; height: 34px; object-fit: contain;}
 
-  /* ปุ่มเพิ่มเครดิตน่ารักๆ สไตล์ปุ่มแคปซูลนุ่มนวล */
+  /* ปุ่มเพิ่มเครดิต */
   .btn{
     border:none; cursor:pointer; font-size:14px; font-weight:700;
     padding:10px 22px; border-radius:30px;
@@ -144,17 +125,12 @@
     color:var(--white);
     box-shadow: 0 4px 12px rgba(255, 123, 156, 0.35);
     transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
+    display: inline-flex; align-items: center; gap: 4px;
   }
-  .btn:hover{
-    transform: translateY(-2px) scale(1.02);
-    box-shadow: 0 6px 16px rgba(255, 123, 156, 0.45);
-  }
+  .btn:hover{transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px rgba(255, 123, 156, 0.45);}
   .btn:active{transform:scale(0.96);}
 
-  /* ปรับแต่งดีไซน์การ์ดรีวิวใหม่น่ารักๆ */
+  /* การ์ดรีวิว */
   .review-card{
     background: rgba(255, 255, 255, 0.92); 
     border-radius: 20px; 
@@ -171,24 +147,57 @@
     background: #FFFFFF;
     border-color: #FFB3C6;
   }
-  .review-user{
-    font-size: 15px;
-    color: #E07A5F;
+  .review-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
   }
-  .review-msg{
-    margin-top: 6px;
-    color: #4A3E3D;
-    font-size: 14.5px;
+  .review-user{font-size: 15px; color: #E07A5F;}
+  .review-time {font-size: 11.5px; color: #B39288; margin-top: 2px;}
+  .review-msg{margin-top: 8px; color: #4A3E3D; font-size: 14.5px; word-break: break-word;}
+
+  /* ส่วนท้ายการ์ด: ปุ่มกด Like สไตล์น่ารัก */
+  .review-footer {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed #FFE3EA;
+    display: flex; justify-content: space-between; align-items: center;
   }
+  .like-btn {
+    background: #FFF0F3;
+    border: 1px solid #FFCCD5;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12.5px;
+    color: #FF7B9C;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .like-btn:hover { background: #FFE3EA; transform: scale(1.05); }
+  .like-btn.liked { background: #FF7B9C; color: white; border-color: #FF7B9C; }
 
   .delete-btn {
-    position: absolute; top: 14px; right: 14px;
     background: none; border: none; cursor: pointer;
-    font-size: 16px; opacity: 0.35; transition: opacity 0.2s;
+    font-size: 14px; opacity: 0.35; transition: opacity 0.2s;
   }
   .delete-btn:hover { opacity: 1; }
 
-  /* POPUP MODAL (เขียนรีวิว) */
+  /* ปุ่มดูรีวิวเพิ่มเติม */
+  .load-more-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    color: #E07A5F;
+    border: 1.5px solid #FFCCD5;
+    padding: 10px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+  }
+  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; }
+
+  /* POPUP MODAL */
   .overlay{
     position:fixed; inset:0; background:rgba(90, 74, 66, 0.3);
     backdrop-filter: blur(4px);
@@ -209,24 +218,17 @@
   .field input, .field textarea{
     width:100%; padding:11px 14px; border:1.5px solid #FFCCD5; border-radius:14px;
     font-family:inherit; font-size:14px; outline:none;
-    background: #FFFBFD;
-    transition: border-color 0.2s;
+    background: #FFFBFD; transition: border-color 0.2s;
   }
-  .field input:focus, .field textarea:focus{
-    border-color: #FF7B9C;
-    background: #FFFFFF;
-  }
+  .field input:focus, .field textarea:focus{border-color: #FF7B9C; background: #FFFFFF;}
   .field textarea{resize:vertical; min-height:85px;}
   .star-pick{display:flex; gap:8px; font-size:26px; cursor:pointer; color:#E2D9D5;}
   .star-pick span.active{color:#FFB703;}
 
-  /* เอฟเฟกต์รูปหัวใจลอยตามเมาส์ */
+  /* เอฟเฟกต์หัวใจลอยตามเมาส์ */
   .heart-sparkle {
-    position: fixed;
-    pointer-events: none;
-    font-size: 14px;
-    animation: fadeAndFly 1s linear forwards;
-    z-index: 9999;
+    position: fixed; pointer-events: none; font-size: 14px;
+    animation: fadeAndFly 1s linear forwards; z-index: 9999;
   }
   @keyframes fadeAndFly {
     0% { opacity: 1; transform: translate(0, 0) scale(1); }
@@ -249,8 +251,7 @@
   </div>
   <div class="hero-text">
     <h1 class="hero-name">Tfour ʚ♡⃛ɞ</h1>
-    <p class="hero-tag">เริ่มเก็บเครดิต  =͟͟͞͞♡🐰˚
-ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
+    <p class="hero-tag">รวมเครดิตและรีวิวความประทับใจจากลูกค้า ขอบคุณทุกคำสั่งซื้อน้า 🌸</p>
     <div class="hero-stats">
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
@@ -259,7 +260,6 @@
 </div>
 
 <div class="main-container">
-
   <section class="wrap-section">
     <div class="section-head">
       <div>
@@ -274,8 +274,8 @@
     
     <!-- โซนแสดงรีวิว -->
     <div id="reviewGrid"></div>
+    <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
-
 </div>
 
 <!-- กล่องป๊อปอัพเขียนรีวิว -->
@@ -312,41 +312,102 @@
 </footer>
 
 <script>
-  // ตั้งค่ารหัสผ่านแอดมินสำหรับลบรีวิว
   const ADMIN_PASS = "1234";
+  const COOLDOWN_TIME = 3 * 60 * 1000; // คูลดาวน์ 3 นาที
+  const PAGE_SIZE = 5; // แสดงทีละ 5 รีวิว
+
+  let visibleCount = PAGE_SIZE;
+  let selectedStars = 5;
 
   const openBtn = document.getElementById('openReviewBtn');
   const closeBtn = document.getElementById('closeReviewBtn');
   const overlay = document.getElementById('reviewOverlay');
   const submitBtn = document.getElementById('submitReviewBtn');
   const reviewGrid = document.getElementById('reviewGrid');
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
   const starPick = document.getElementById('starPick');
   const statCount = document.getElementById('statCount');
-  let selectedStars = 5;
+  const statAvg = document.getElementById('statAvg');
 
-  // โหลดรีวิวจาก LocalStorage
-  let reviews = JSON.parse(localStorage.getItem('tfour_reviews')) || [
-    { name: "ลูกค้า A", stars: 5, msg: "งานน่ารักมากเลยค่ะ แม่ค้าตอบไวมาก ไว้จะมาอุดหนุนอีกแน่นอนค่ะ ✨" }
+  // โหลดข้อมูลรีวิว
+  let reviews = JSON.parse(localStorage.getItem('tfour_reviews_v2')) || [
+    { 
+      id: 1, 
+      name: "ลูกค้า A", 
+      stars: 5, 
+      msg: "งานน่ารักมากเลยค่ะ แม่ค้าตอบไวมาก ไว้จะมาอุดหนุนอีกแน่นอนค่ะ ✨", 
+      time: "03/09/2026 14:30",
+      likes: 3 
+    }
   ];
 
   function renderReviews() {
     reviewGrid.innerHTML = '';
-    reviews.forEach((rv, index) => {
+    const displayReviews = reviews.slice(0, visibleCount);
+
+    displayReviews.forEach((rv, index) => {
       const starStr = '★'.repeat(rv.stars);
       const card = document.createElement('div');
       card.className = 'review-card';
+
+      // เช็กการกด Like ในเครื่อง
+      const likedKey = `liked_${rv.id}`;
+      const isLiked = localStorage.getItem(likedKey);
+
       card.innerHTML = `
-        <button class="delete-btn" onclick="deleteReview(${index})" title="ลบรีวิว (สำหรับแอดมิน)">🗑️</button>
-        <div class="review-user"><b>คุณ${rv.name}</b> <span style="color:#FFB703; margin-left:4px;">${starStr}</span></div>
+        <div class="review-header">
+          <div>
+            <div class="review-user"><b>คุณ${rv.name}</b> <span style="color:#FFB703; margin-left:4px;">${starStr}</span></div>
+            <div class="review-time">🕒 ${rv.time || 'เมื่อนานมาแล้ว'}</div>
+          </div>
+          <button class="delete-btn" onclick="deleteReview(${index})" title="ลบรีวิว (แอดมิน)">🗑️</button>
+        </div>
         <div class="review-msg">${rv.msg}</div>
+        <div class="review-footer">
+          <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${index})">
+            <span>${isLiked ? '💖' : '♡'}</span> ถูกใจ (<b id="like-count-${index}">${rv.likes || 0}</b>)
+          </button>
+        </div>
       `;
       reviewGrid.appendChild(card);
     });
+
+    // ปุ่มดูเพิ่มเติม
+    if (reviews.length > visibleCount) {
+      loadMoreBtn.style.display = 'block';
+    } else {
+      loadMoreBtn.style.display = 'none';
+    }
+
+    // คำนวณสถิติ
     statCount.textContent = reviews.length;
-    localStorage.setItem('tfour_reviews', JSON.stringify(reviews));
+    if (reviews.length > 0) {
+      const totalStars = reviews.reduce((sum, r) => sum + r.stars, 0);
+      statAvg.textContent = (totalStars / reviews.length).toFixed(1);
+    } else {
+      statAvg.textContent = "5.0";
+    }
+
+    localStorage.setItem('tfour_reviews_v2', JSON.stringify(reviews));
   }
 
-  // ระบบลบรีวิวเฉพาะแอดมิน
+  // ระบบกด Like / ถูกใจ
+  function toggleLike(index) {
+    const rv = reviews[index];
+    const likedKey = `liked_${rv.id}`;
+    const isLiked = localStorage.getItem(likedKey);
+
+    if (isLiked) {
+      rv.likes = Math.max(0, (rv.likes || 1) - 1);
+      localStorage.removeItem(likedKey);
+    } else {
+      rv.likes = (rv.likes || 0) + 1;
+      localStorage.setItem(likedKey, 'true');
+    }
+    renderReviews();
+  }
+
+  // ระบบลบรีวิว
   function deleteReview(index) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อลบรีวิวนี้:");
     if (password === ADMIN_PASS) {
@@ -357,6 +418,12 @@
       alert("รหัสผ่านไม่ถูกต้อง!");
     }
   }
+
+  // ปุ่มดูเพิ่มเติม
+  loadMoreBtn.addEventListener('click', () => {
+    visibleCount += PAGE_SIZE;
+    renderReviews();
+  });
 
   // เปิด-ปิด Modal
   openBtn.addEventListener('click', () => overlay.classList.add('open'));
@@ -377,8 +444,17 @@
     }
   });
 
-  // บันทึกรีวิวใหม่
+  // บันทึกรีวิวใหม่ (มีคูลดาวน์ + บันทึกเวลาปัจจุบัน)
   submitBtn.addEventListener('click', () => {
+    const lastPostTime = localStorage.getItem('last_review_time');
+    const now = Date.now();
+
+    if (lastPostTime && (now - lastPostTime < COOLDOWN_TIME)) {
+      const remainingSec = Math.ceil((COOLDOWN_TIME - (now - lastPostTime)) / 1000);
+      alert(`คุณส่งรีวิวเร็วเกินไปน้า กรุณารออีก ${remainingSec} วินาทีค่ะ 🌸`);
+      return;
+    }
+
     const name = document.getElementById('rvName').value.trim();
     const msg = document.getElementById('rvMsg').value.trim();
 
@@ -387,7 +463,21 @@
       return;
     }
 
-    reviews.unshift({ name: name, stars: selectedStars, msg: msg });
+    // สร้างรูปแบบ วันที่/เวลา
+    const dateObj = new Date();
+    const dateStr = dateObj.toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const timeStr = dateObj.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+    reviews.unshift({ 
+      id: Date.now(),
+      name: name, 
+      stars: selectedStars, 
+      msg: msg,
+      time: `${dateStr} ${timeStr}`,
+      likes: 0 
+    });
+
+    localStorage.setItem('last_review_time', now);
     renderReviews();
 
     document.getElementById('rvName').value = '';
@@ -395,11 +485,11 @@
     overlay.classList.remove('open');
   });
 
-  // ลูกเล่นเอฟเฟกต์หัวใจลอยตามเมาส์
+  // เอฟเฟกต์หัวใจลอยตามเมาส์
   let lastSparkle = 0;
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    if (now - lastSparkle > 120) { // ให้สร้างหัวใจเป็นระยะเพื่อไม่ให้กระตุก
+    if (now - lastSparkle > 120) {
       const heart = document.createElement('div');
       heart.className = 'heart-sparkle';
       heart.textContent = ['🌸', '✨', '💖', '🎀'][Math.floor(Math.random() * 4)];
@@ -411,7 +501,6 @@
     }
   });
 
-  // แสดงผลครั้งแรก
   renderReviews();
 </script>
 
