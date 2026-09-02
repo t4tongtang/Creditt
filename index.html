@@ -22,11 +22,12 @@
   
   body{
     margin:0;
-    background-color: var(--paper);
+    background-color: #FFF7F9;
     background-image: 
-      linear-gradient(to right, rgba(255, 182, 193, 0.2) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 182, 193, 0.2) 1px, transparent 1px);
+      radial-gradient(#FFB3C6 1.2px, transparent 1.2px), 
+      radial-gradient(#FFCCD5 1.2px, #FFF7F9 1.2px);
     background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
     color:var(--ink);
     font-family:'Mali', cursive, sans-serif;
     line-height:1.6;
@@ -44,11 +45,11 @@
   /* NAV ใสมองเห็นด้านหลัง */
   .nav{
     position:sticky; top:0; z-index:50;
-    background: rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.65);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px dashed rgba(255, 182, 193, 0.7);
-    box-shadow: 0 4px 15px rgba(255, 182, 193, 0.1);
+    border-bottom: 2px dashed rgba(255, 182, 193, 0.8);
+    box-shadow: 0 4px 20px rgba(255, 179, 198, 0.2);
   }
   .nav-inner{
     max-width:720px; margin:0 auto; padding:12px 20px;
@@ -56,14 +57,15 @@
   }
   .nav-brand{
     font-size:22px; 
-    color:#E07A5F; 
-    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    color:#FF6B8B; 
+    text-shadow: 0 0 10px rgba(255, 179, 198, 0.6);
   }
 
   /* HERO HEADER */
   .hero{position:relative; padding-bottom:30px; text-align: center;}
   .banner{
-    width:100%; height:200px; object-fit:cover; display:block;
+    width:100%; height:210px; object-fit:cover; display:block;
+    box-shadow: 0 4px 15px rgba(255, 179, 198, 0.3);
   }
   .profile-wrap{
     max-width:720px; margin:0 auto; position:relative;
@@ -71,23 +73,36 @@
   }
   
   .profile{
-    position:absolute; top:-60px;
-    width:120px; height:120px; object-fit:cover;
+    position:absolute; top:-65px;
+    width:125px; height:125px; object-fit:cover;
     background:var(--white);
     border:4px solid var(--white);
     border-radius: 50%;
-    box-shadow:0 8px 20px rgba(255, 179, 198, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 123, 156, 0.4), 0 0 15px rgba(255, 255, 255, 0.8);
     animation: float 4s ease-in-out infinite;
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-7px); }
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(3deg); }
   }
 
-  .hero-text{padding:70px 20px 0;}
-  .hero-name{font-size:32px; color: #E07A5F; letter-spacing: 0.5px;}
-  .hero-tag{margin-top:8px; color:var(--ink-soft); font-size:15px; max-width:52ch; margin-left:auto; margin-right:auto; word-break: break-word;}
+  .hero-text{padding:75px 20px 0;}
+  .hero-name{
+    font-size:32px; color: #FF6B8B; 
+    letter-spacing: 0.5px;
+    text-shadow: 2px 2px 0px #FFF, 0 0 12px rgba(255, 107, 139, 0.3);
+  }
+  .hero-tag{
+    margin-top:8px; color:var(--ink-soft); font-size:15px; 
+    max-width:55ch; margin-left:auto; margin-right:auto; 
+    word-break: break-word;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 6px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px dashed #FFCCD5;
+  }
   
   /* กล่องสถิติ + ปุ่มกดถูกใจร้าน */
   .hero-stats{
@@ -99,11 +114,11 @@
     flex-wrap: wrap;
   }
   .stat{
-    background: rgba(255, 255, 255, 0.9); 
+    background: rgba(255, 255, 255, 0.95); 
     padding: 8px 18px; 
     border-radius: 30px;
     border: 1.5px solid #FFE3EA;
-    box-shadow: 0 4px 12px rgba(255, 179, 198, 0.15);
+    box-shadow: 0 4px 15px rgba(255, 179, 198, 0.2);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -121,15 +136,16 @@
     font-size: 13.5px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255, 123, 156, 0.15);
-    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(255, 123, 156, 0.2);
+    transition: all 0.25s ease;
     display: flex; align-items: center; gap: 6px;
   }
   .shop-like-btn:hover {
-    transform: translateY(-2px) scale(1.03);
+    transform: translateY(-2px) scale(1.04);
     background: #FF7B9C;
     color: white;
     border-color: #FF7B9C;
+    box-shadow: 0 6px 18px rgba(255, 123, 156, 0.4);
   }
   .shop-like-btn.liked {
     background: #FF7B9C;
@@ -137,17 +153,17 @@
     border-color: #FF7B9C;
   }
 
-  /* REVIEWS SECTION */
+  /* REVIEWS & CONTENT SECTION */
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
   
   .wrap-section {
     padding: 24px;
     margin-bottom: 25px;
     border-radius: 28px;
-    box-shadow: 0 10px 25px rgba(255, 179, 198, 0.12);
-    background: linear-gradient(180deg, rgba(255, 240, 243, 0.9) 0%, rgba(250, 228, 233, 0.85) 100%);
+    box-shadow: 0 10px 30px rgba(255, 179, 198, 0.2);
+    background: linear-gradient(180deg, rgba(255, 250, 252, 0.95) 0%, rgba(255, 235, 240, 0.9) 100%);
     border: 2px solid #FFD6E0;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
   }
   .section-head{margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
   .section-head h2{font-size:22px; display: flex; align-items: center; gap: 8px; color: #5A4A42;}
@@ -159,29 +175,32 @@
   .btn{
     border:none; cursor:pointer; font-size:14px; font-weight:700;
     padding:10px 22px; border-radius:30px;
-    background: linear-gradient(135deg, #FF9ebb 0%, #FF7B9C 100%);
+    background: linear-gradient(135deg, #FF9EBB 0%, #FF6B8B 100%);
     color:var(--white);
-    box-shadow: 0 4px 12px rgba(255, 123, 156, 0.35);
-    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+    transition: all 0.25s ease;
     display: inline-flex; align-items: center; gap: 4px;
   }
-  .btn:hover{transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px rgba(255, 123, 156, 0.45);}
+  .btn:hover{
+    transform: translateY(-2px) scale(1.03); 
+    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.5);
+  }
   .btn:active{transform:scale(0.96);}
 
   /* การ์ดรีวิว */
   .review-card{
-    background: rgba(255, 255, 255, 0.92); 
+    background: rgba(255, 255, 255, 0.95); 
     border-radius: 20px; 
     padding: 18px 20px; 
     margin-bottom: 14px;
     border: 1.5px dashed #FFCCD5;
-    box-shadow: 0 4px 12px rgba(255, 179, 198, 0.1);
+    box-shadow: 0 4px 12px rgba(255, 179, 198, 0.12);
     position: relative;
     transition: all 0.25s ease;
   }
   .review-card:hover{
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255, 179, 198, 0.25);
+    box-shadow: 0 8px 22px rgba(255, 179, 198, 0.3);
     background: #FFFFFF;
     border-color: #FFB3C6;
   }
@@ -192,7 +211,7 @@
   .review-time {font-size: 11.5px; color: #B39288; margin-top: 2px;}
   .review-msg{margin-top: 8px; color: #4A3E3D; font-size: 14.5px; word-break: break-word;}
 
-  /* ส่วนท้ายการ์ด: ปุ่มกด Like สไตล์น่ารัก */
+  /* ส่วนท้ายการ์ด: ปุ่มกด Like */
   .review-footer {
     margin-top: 12px;
     padding-top: 10px;
@@ -222,7 +241,7 @@
   /* ปุ่มดูรีวิวเพิ่มเติม */
   .load-more-btn {
     width: 100%;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     color: #E07A5F;
     border: 1.5px solid #FFCCD5;
     padding: 10px;
@@ -233,12 +252,52 @@
     transition: all 0.2s;
     margin-top: 10px;
   }
-  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; }
+  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; box-shadow: 0 4px 12px rgba(255, 179, 198, 0.2); }
+
+  /* เซกชันประวัติ/รูปปกเก่า */
+  .old-credit-box {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 22px;
+    padding: 20px;
+    border: 2px dashed #FFCCD5;
+  }
+  .old-credit-img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    border: 4px solid #FFFFFF;
+    margin: 12px 0;
+    transition: transform 0.3s ease;
+  }
+  .old-credit-img:hover {
+    transform: scale(1.02);
+  }
+  .line-link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #06C755;
+    color: white;
+    text-decoration: none;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 13.5px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3);
+    transition: all 0.2s ease;
+    margin-top: 6px;
+  }
+  .line-link-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4);
+  }
 
   /* POPUP MODAL */
   .overlay{
-    position:fixed; inset:0; background:rgba(90, 74, 66, 0.3);
-    backdrop-filter: blur(4px);
+    position:fixed; inset:0; background:rgba(90, 74, 66, 0.35);
+    backdrop-filter: blur(5px);
     display:none; align-items:center; justify-content:center; z-index:100;
     padding: 16px;
   }
@@ -246,7 +305,7 @@
   .modal{
     width:100%; max-width:440px; background:var(--white);
     border-radius:24px; padding:24px; 
-    box-shadow:0 15px 35px rgba(255, 123, 156, 0.25);
+    box-shadow:0 15px 35px rgba(255, 123, 156, 0.3);
     border: 2px solid #FFE3EA;
   }
   .modal-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
@@ -265,12 +324,12 @@
 
   /* เอฟเฟกต์หัวใจลอยตามเมาส์ */
   .heart-sparkle {
-    position: fixed; pointer-events: none; font-size: 14px;
+    position: fixed; pointer-events: none; font-size: 15px;
     animation: fadeAndFly 1s linear forwards; z-index: 9999;
   }
   @keyframes fadeAndFly {
     0% { opacity: 1; transform: translate(0, 0) scale(1); }
-    100% { opacity: 0; transform: translate(0, -25px) scale(1.4); }
+    100% { opacity: 0; transform: translate(0, -30px) scale(1.5); }
   }
 </style>
 </head>
@@ -301,6 +360,8 @@
 </div>
 
 <div class="main-container">
+
+  <!-- โซนรีวิวหลัก -->
   <section class="wrap-section">
     <div class="section-head">
       <div>
@@ -317,6 +378,24 @@
     <div id="reviewGrid"></div>
     <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
+
+  <!-- โซนรูปปกเครดิตเก่าด้านล่างสุด -->
+  <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.9) 0%, rgba(255, 230, 238, 0.85) 100%);">
+    <div class="old-credit-box">
+      <h3 style="color: #E07A5F; font-size: 18px;">• เครดิตไลน์เก่า / ประวัติร้าน •</h3>
+      <p style="font-size: 13px; color: #8C736A; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
+      
+      <!-- รูปปกเครดิตเก่า -->
+      <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า">
+      
+      <div>
+        <a class="line-link-btn" href="https://linevoom.line.me/post/1166428808429267751" target="_blank">
+          💚 ดูบอร์ดเครดิตเดิมบน Line Voom
+        </a>
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <!-- กล่องป๊อปอัพเขียนรีวิว -->
@@ -560,14 +639,14 @@
     overlay.classList.remove('open');
   });
 
-  // เอฟเฟกต์หัวใจลอยตามเมาส์
+  // เอฟเฟกต์วิ้งค์ๆ ลอยตามเมาส์
   let lastSparkle = 0;
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
-    if (now - lastSparkle > 120) {
+    if (now - lastSparkle > 100) {
       const heart = document.createElement('div');
       heart.className = 'heart-sparkle';
-      heart.textContent = ['🌸', '✨', '💖', '🎀'][Math.floor(Math.random() * 4)];
+      heart.textContent = ['🌸', '✨', '💖', '🎀', '☁️', '⭐'][Math.floor(Math.random() * 6)];
       heart.style.left = e.clientX + 'px';
       heart.style.top = e.clientY + 'px';
       document.body.appendChild(heart);
