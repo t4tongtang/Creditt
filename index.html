@@ -13,13 +13,14 @@
   @import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Mali:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
   :root{
-    --paper:#FFFDF9;
-    --ink:#5A4A42;
-    --ink-soft:#8C736A;
-    --rose-pink:#FFB3C6;
-    --card-bg: rgba(255, 255, 255, 0.9);
-    --card-border: #FFE3EA;
-    --white:#FFFFFF;
+    --paper: #FFFDF9;
+    --ink: #5C4A42;               /* สีน้ำตาลอุ่น / ชานม */
+    --ink-soft: #8C756B;          /* สีชานมอ่อน */
+    --peach-main: #FF9E79;        /* สีส้มพีชหลัก */
+    --peach-soft: #FFEADF;        /* สีครีมพีขอ่อน */
+    --peach-border: #FFD2C1;      /* เส้นขอบสีพีช */
+    --card-bg: rgba(255, 255, 255, 0.92);
+    --white: #FFFFFF;
   }
 
   *{box-sizing:border-box;}
@@ -27,10 +28,10 @@
   
   body{
     margin:0;
-    background-color: #FFF2F5;
+    background-color: #FFF6F0; /* พื้นหลังสีครีมส้มพีช */
     background-image: 
-      linear-gradient(rgba(255, 182, 193, 0.25) 1.5px, transparent 1.5px),
-      linear-gradient(90deg, rgba(255, 182, 193, 0.25) 1.5px, transparent 1.5px);
+      linear-gradient(rgba(255, 176, 136, 0.2) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(255, 176, 136, 0.2) 1.5px, transparent 1.5px);
     background-size: 24px 24px;
     color:var(--ink);
     font-family:'Mali', cursive, sans-serif;
@@ -54,8 +55,8 @@
 
   .floating-item {
     position: absolute;
-    bottom: -250px; /* ปรับจุดเริ่มลอยลงไปอีกเพื่อรองรับขนาดรูปที่ขยายใหญ่ขึ้น */
-    opacity: 0.3;
+    bottom: -250px;
+    opacity: 0.35;
     animation: floatUp linear infinite;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
   }
@@ -66,10 +67,10 @@
       opacity: 0;
     }
     10% {
-      opacity: 0.32;
+      opacity: 0.35;
     }
     85% {
-      opacity: 0.32;
+      opacity: 0.35;
     }
     100% {
       transform: translateY(-135vh) rotate(20deg);
@@ -89,11 +90,11 @@
   
   .nav{
     position:sticky; top:0; z-index:50;
-    background: rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2.5px dashed rgba(255, 182, 193, 0.8);
-    box-shadow: 0 4px 20px rgba(255, 179, 198, 0.2);
+    border-bottom: 2.5px dashed rgba(255, 176, 136, 0.7);
+    box-shadow: 0 4px 20px rgba(255, 158, 121, 0.15);
   }
   .nav-inner{
     max-width:720px; margin:0 auto; padding:12px 20px;
@@ -101,14 +102,14 @@
   }
   .nav-brand{
     font-size:22px; 
-    color:#FF6B8B; 
-    text-shadow: 0 0 10px rgba(255, 179, 198, 0.6);
+    color:#E07A5F; 
+    text-shadow: 0 0 10px rgba(255, 176, 136, 0.5);
   }
 
   .hero{position:relative; padding-bottom:30px; text-align: center; z-index: 1;}
   .banner{
     width:100%; height:210px; object-fit:cover; display:block;
-    box-shadow: 0 4px 15px rgba(255, 179, 198, 0.3);
+    box-shadow: 0 4px 15px rgba(224, 122, 95, 0.2);
   }
   .profile-wrap{
     max-width:720px; margin:0 auto; position:relative;
@@ -121,7 +122,7 @@
     background:var(--white);
     border:4px solid var(--white);
     border-radius: 50%;
-    box-shadow: 0 8px 25px rgba(255, 123, 156, 0.4), 0 0 15px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 25px rgba(224, 122, 95, 0.3), 0 0 15px rgba(255, 255, 255, 0.8);
     animation: float 4s ease-in-out infinite;
   }
 
@@ -132,20 +133,20 @@
 
   .hero-text{padding:75px 20px 0;}
   .hero-name{
-    font-size:32px; color: #FF6B8B; 
+    font-size:32px; color: #E07A5F; 
     letter-spacing: 0.5px;
-    text-shadow: 2px 2px 0px #FFF, 0 0 12px rgba(255, 107, 139, 0.3);
+    text-shadow: 2px 2px 0px #FFF, 0 0 12px rgba(224, 122, 95, 0.25);
   }
   .hero-tag{
     margin-top:8px; color:var(--ink-soft); font-size:15px; 
     max-width:55ch; margin-left:auto; margin-right:auto; 
     word-break: break-word;
-    background: rgba(255, 255, 255, 0.85);
+    background: rgba(255, 255, 255, 0.9);
     padding: 8px 18px;
     border-radius: 20px;
     display: inline-block;
-    border: 1.5px dashed #FFCCD5;
-    box-shadow: 0 4px 10px rgba(255, 179, 198, 0.15);
+    border: 1.5px dashed var(--peach-border);
+    box-shadow: 0 4px 10px rgba(255, 176, 136, 0.12);
   }
   
   .hero-stats{
@@ -160,33 +161,33 @@
     background: rgba(255, 255, 255, 0.95); 
     padding: 8px 18px; 
     border-radius: 30px;
-    border: 1.5px solid #FFE3EA;
-    box-shadow: 0 4px 15px rgba(255, 179, 198, 0.2);
+    border: 1.5px solid var(--peach-border);
+    box-shadow: 0 4px 15px rgba(255, 176, 136, 0.15);
     display: flex;
     align-items: center;
     gap: 6px;
   }
-  .stat b{font-size:18px; color:#FF7B9C;}
+  .stat b{font-size:18px; color:#E07A5F;}
   .stat span{font-size:13px; color:var(--ink-soft);}
 
   .shop-like-btn {
-    background: linear-gradient(135deg, #FFF0F3 0%, #FFE3EA 100%);
-    border: 1.5px solid #FFCCD5;
+    background: linear-gradient(135deg, #FFF0E8 0%, #FFEADF 100%);
+    border: 1.5px solid var(--peach-border);
     padding: 8px 18px;
     border-radius: 30px;
-    color: #FF7B9C;
+    color: #E07A5F;
     font-size: 13.5px;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(255, 123, 156, 0.2);
+    box-shadow: 0 4px 12px rgba(224, 122, 95, 0.15);
     transition: all 0.25s ease;
     display: flex; align-items: center; gap: 6px;
   }
   .shop-like-btn:hover {
     transform: translateY(-2px) scale(1.04);
-    background: #FF7B9C;
+    background: #E07A5F;
     color: white;
-    border-color: #FF7B9C;
+    border-color: #E07A5F;
   }
 
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; position: relative; z-index: 1; }
@@ -206,8 +207,8 @@
     display: flex;
     align-items: center;
     gap: 16px;
-    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.25);
-    border: 1px solid rgba(255, 218, 224, 0.6);
+    box-shadow: 0 10px 25px rgba(255, 176, 136, 0.2);
+    border: 1px solid rgba(255, 210, 193, 0.6);
     cursor: pointer;
     transition: all 0.25s ease;
     position: relative;
@@ -221,13 +222,13 @@
     top: -20px;
     width: 80px;
     height: 80px;
-    background: rgba(255, 182, 193, 0.15);
+    background: rgba(255, 176, 136, 0.12);
     border-radius: 50%;
     pointer-events: none;
   }
   .vote-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 14px 30px rgba(255, 154, 178, 0.35);
+    box-shadow: 0 14px 30px rgba(224, 122, 95, 0.25);
   }
   .vote-card:active {
     transform: scale(0.98);
@@ -237,8 +238,8 @@
     width: 52px;
     height: 52px;
     border-radius: 16px;
-    background: linear-gradient(135deg, #FFE5EC 0%, #FFCCD5 100%);
-    color: #FF5C8A;
+    background: linear-gradient(135deg, #FFEADF 0%, #FFD2C1 100%);
+    color: #E07A5F;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,7 +248,7 @@
     font-weight: 800;
     position: relative;
     flex-shrink: 0;
-    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 4px 10px rgba(255, 92, 138, 0.15);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 4px 10px rgba(224, 122, 95, 0.15);
   }
   
   .badge-icon::before {
@@ -264,8 +265,8 @@
     font-size: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
-  .badge-plus::before { content: '♡'; color: #FF5C8A; }
-  .badge-minus::before { content: '+'; color: #FF5C8A; font-weight: bold; }
+  .badge-plus::before { content: '♡'; color: #E07A5F; }
+  .badge-minus::before { content: '+'; color: #E07A5F; font-weight: bold; }
 
   .vote-info {
     display: flex;
@@ -276,22 +277,22 @@
     font-family: 'Plus Jakarta Sans', 'Mali', sans-serif;
     font-size: 17px;
     font-weight: 800;
-    color: #2D2321;
+    color: #4A3A34;
     line-height: 1.2;
   }
   .vote-desc {
     font-size: 12px;
-    color: #A08C85;
+    color: #8C756B;
     margin-top: 4px;
     font-weight: 500;
   }
 
   .vote-card.voted {
-    border-color: #FF85A1;
-    background: #FFF5F7;
+    border-color: #E07A5F;
+    background: #FFF5F0;
   }
   .vote-card.voted .badge-icon {
-    background: #FF5C8A;
+    background: #E07A5F;
     color: #FFFFFF;
   }
 
@@ -304,13 +305,13 @@
     padding: 24px;
     margin-bottom: 25px;
     border-radius: 28px;
-    box-shadow: 0 10px 30px rgba(255, 179, 198, 0.25);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.9) 100%);
-    border: 2px solid #FFD6E0;
+    box-shadow: 0 10px 30px rgba(255, 176, 136, 0.18);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 246, 240, 0.9) 100%);
+    border: 2px solid #FFD8C9;
     backdrop-filter: blur(8px);
   }
   .section-head{margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap;}
-  .section-head h2{font-size:20px; display: flex; align-items: center; gap: 8px; color: #5A4A42;}
+  .section-head h2{font-size:20px; display: flex; align-items: center; gap: 8px; color: #5C4A42;}
   .section-sub{color:var(--ink-soft); font-size:13px;}
 
   .title-icon {width: 32px; height: 32px; object-fit: contain;}
@@ -318,15 +319,15 @@
   .btn{
     border:none; cursor:pointer; font-size:13.5px; font-weight:700;
     padding:8px 18px; border-radius:30px;
-    background: linear-gradient(135deg, #FF9EBB 0%, #FF6B8B 100%);
+    background: linear-gradient(135deg, #FFB088 0%, #E07A5F 100%);
     color:var(--white);
-    box-shadow: 0 4px 15px rgba(255, 107, 139, 0.35);
+    box-shadow: 0 4px 15px rgba(224, 122, 95, 0.3);
     transition: all 0.25s ease;
     display: inline-flex; align-items: center; gap: 4px;
   }
   .btn:hover{
     transform: translateY(-2px) scale(1.03); 
-    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.45);
+    box-shadow: 0 8px 20px rgba(224, 122, 95, 0.4);
   }
 
   .review-card{
@@ -334,40 +335,40 @@
     border-radius: 22px; 
     padding: 18px 20px; 
     margin-bottom: 14px;
-    border: 1.5px dashed #FFCCD5;
-    box-shadow: 0 4px 12px rgba(255, 179, 198, 0.12);
+    border: 1.5px dashed var(--peach-border);
+    box-shadow: 0 4px 12px rgba(255, 176, 136, 0.1);
     position: relative;
     transition: all 0.25s ease;
   }
   .review-card:hover{
     transform: translateY(-3px);
-    box-shadow: 0 8px 22px rgba(255, 179, 198, 0.3);
+    box-shadow: 0 8px 22px rgba(255, 176, 136, 0.22);
     background: #FFFFFF;
-    border-color: #FFB3C6;
+    border-color: #FFB088;
   }
   .review-header { display: flex; justify-content: space-between; align-items: flex-start; }
   .review-user{font-size: 15px; color: #E07A5F;}
-  .review-time {font-size: 11.5px; color: #B39288; margin-top: 2px;}
-  .review-msg{margin-top: 8px; color: #4A3E3D; font-size: 14.5px; word-break: break-word;}
+  .review-time {font-size: 11.5px; color: #8C756B; margin-top: 2px;}
+  .review-msg{margin-top: 8px; color: #4A3A34; font-size: 14.5px; word-break: break-word;}
 
   .review-footer {
     margin-top: 12px;
     padding-top: 10px;
-    border-top: 1px dashed #FFE3EA;
+    border-top: 1px dashed #FFEADF;
     display: flex; justify-content: space-between; align-items: center;
   }
   .like-btn {
-    background: #FFF0F3;
-    border: 1px solid #FFCCD5;
+    background: #FFF0E8;
+    border: 1px solid var(--peach-border);
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 12.5px;
-    color: #FF7B9C;
+    color: #E07A5F;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex; align-items: center; gap: 4px;
   }
-  .like-btn:hover { background: #FFE3EA; transform: scale(1.05); }
+  .like-btn:hover { background: #FFEADF; transform: scale(1.05); }
 
   .action-btn-group { display: flex; gap: 6px; }
   .icon-btn {
@@ -380,7 +381,7 @@
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
     color: #E07A5F;
-    border: 1.5px solid #FFCCD5;
+    border: 1.5px solid var(--peach-border);
     padding: 10px;
     border-radius: 20px;
     font-size: 14px;
@@ -389,7 +390,7 @@
     transition: all 0.2s;
     margin-top: 10px;
   }
-  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; }
+  .load-more-btn:hover { background: #FFFFFF; border-color: #E07A5F; }
 
   /* กล่องเครดิตเก่า Polaroid */
   .old-credit-box {
@@ -397,7 +398,7 @@
     background: rgba(255, 255, 255, 0.85);
     border-radius: 24px;
     padding: 24px 20px;
-    border: 2px dashed #FFCCD5;
+    border: 2px dashed var(--peach-border);
   }
   .old-credit-grid {
     display: flex;
@@ -412,8 +413,8 @@
     background: #FFFFFF;
     padding: 10px 10px 18px 10px;
     border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(255, 179, 198, 0.3);
-    border: 1px solid #FFE3EA;
+    box-shadow: 0 10px 25px rgba(224, 122, 95, 0.18);
+    border: 1px solid #FFEADF;
     transition: transform 0.3s ease;
     max-width: 480px;
     width: 100%;
@@ -428,7 +429,7 @@
     transform: translateX(-50%);
     width: 90px;
     height: 22px;
-    background: rgba(255, 182, 193, 0.6);
+    background: rgba(255, 176, 136, 0.5);
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     backdrop-filter: blur(2px);
@@ -446,7 +447,7 @@
 
   /* Overlay Modal */
   .overlay{
-    position:fixed; inset:0; background:rgba(90, 74, 66, 0.35);
+    position:fixed; inset:0; background:rgba(92, 74, 66, 0.35);
     backdrop-filter: blur(5px);
     display:none; align-items:center; justify-content:center; z-index:100;
     padding: 16px;
@@ -455,8 +456,8 @@
   .modal{
     width:100%; max-width:440px; background:var(--white);
     border-radius:26px; padding:24px; 
-    box-shadow:0 15px 35px rgba(255, 123, 156, 0.3);
-    border: 2px solid #FFE3EA;
+    box-shadow:0 15px 35px rgba(224, 122, 95, 0.25);
+    border: 2px solid #FFEADF;
     max-height: 85vh;
     overflow-y: auto;
   }
@@ -465,8 +466,8 @@
   .field{margin-bottom:14px;}
   .field label{display:block; font-size:13.5px; color:var(--ink-soft); margin-bottom:6px;}
   .field input, .field textarea{
-    width:100%; padding:11px 14px; border:1.5px solid #FFCCD5; border-radius:14px;
-    font-family:inherit; font-size:14px; outline:none; background: #FFFBFD;
+    width:100%; padding:11px 14px; border:1.5px solid var(--peach-border); border-radius:14px;
+    font-family:inherit; font-size:14px; outline:none; background: #FFFBF9;
   }
   .field textarea{resize:vertical; min-height:85px;}
   .star-pick{display:flex; gap:8px; font-size:26px; cursor:pointer; color:#E2D9D5;}
@@ -474,17 +475,17 @@
 
   /* การ์ดรายการลบสำหรับแอดมิน */
   .report-item {
-    background: #FFFBFD;
-    border: 1px solid #FFCCD5;
+    background: #FFFBF9;
+    border: 1px solid var(--peach-border);
     border-radius: 16px;
     padding: 14px;
     margin-bottom: 12px;
   }
   .report-item-head { display: flex; justify-content: space-between; align-items: center; }
   .report-item-title { font-weight: bold; color: #E07A5F; }
-  .report-item-time { font-size: 11px; color: #A08C85; }
-  .report-item-msg { font-size: 13px; color: #5A4A42; margin-top: 6px; }
-  .report-item-link { font-size: 12px; color: #FF5C8A; word-break: break-all; display: block; margin-top: 4px; }
+  .report-item-time { font-size: 11px; color: #8C756B; }
+  .report-item-msg { font-size: 13px; color: #5C4A42; margin-top: 6px; }
+  .report-item-link { font-size: 12px; color: #E07A5F; word-break: break-all; display: block; margin-top: 4px; }
 
   .heart-sparkle {
     position: fixed; pointer-events: none; font-size: 15px;
@@ -498,7 +499,7 @@
 </head>
 <body>
 
-<!-- 🌸 ส่วนพื้นหลังไอคอนลอย (ขยายขนาดขึ้นอีก 1 เท่าตัวเรียบร้อยค่ะ) -->
+<!-- 🌸 ส่วนพื้นหลังไอคอนลอย -->
 <div class="floating-bg-container">
   <img src="ไม่มีชื่อ 111_20251130233923.png" class="floating-item" style="left: 4%; width: 180px; animation-duration: 14s; animation-delay: 0s;">
   <img src="ไม่มีชื่อ 111_20251130233930.png" class="floating-item" style="left: 16%; width: 152px; animation-duration: 11s; animation-delay: 4s;">
@@ -530,7 +531,7 @@
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
       <button class="shop-like-btn" id="shopLikeBtn">
-        <span id="shopHeartIcon">💖</span> ถูกใจร้าน (<b id="shopLikeCount">0</b>)
+        <span id="shopHeartIcon">🧡</span> ถูกใจร้าน (<b id="shopLikeCount">0</b>)
       </button>
     </div>
   </div>
@@ -560,7 +561,7 @@
   <section class="wrap-section">
     <div class="section-head">
       <div>
-        <div style="font-size: 11px; letter-spacing: 1px; color: #FF9EBB; font-weight: 700; text-transform: uppercase;">CUSTOMER REVIEWS</div>
+        <div style="font-size: 11px; letter-spacing: 1px; color: #E07A5F; font-weight: 700; text-transform: uppercase;">CUSTOMER REVIEWS</div>
         <h2>
           <img class="title-icon" src="Untitled Design - 1 - Edited.png" alt="รีวิว">
           Reviews
@@ -574,10 +575,10 @@
     <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
 
-  <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.95) 0%, rgba(255, 230, 238, 0.9) 100%);">
+  <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 248, 242, 0.95) 0%, rgba(255, 235, 222, 0.9) 100%);">
     <div class="old-credit-box">
       <h3 style="color: #E07A5F; font-size: 18px;">• เครดิตไลน์เก่า / ประวัติร้าน •</h3>
-      <p style="font-size: 13px; color: #8C736A; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
+      <p style="font-size: 13px; color: #8C756B; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
       
       <div class="old-credit-grid">
         <div class="polaroid-frame">
@@ -646,7 +647,7 @@
       <label>แนบลิงก์รูปหลักฐาน (เช่น ลิงก์ Drive / Imgur / รูปภาพ)</label>
       <input type="url" id="mnProofLink" placeholder="https://...">
     </div>
-    <button class="btn" id="submitMinusBtn" style="width:100%; justify-content:center; margin-top:10px; background: linear-gradient(135deg, #FF7B9C 0%, #E07A5F 100%);">ส่งหลักฐานให้ร้านตรวจสอบ 💌</button>
+    <button class="btn" id="submitMinusBtn" style="width:100%; justify-content:center; margin-top:10px;">ส่งหลักฐานให้ร้านตรวจสอบ 💌</button>
   </div>
 </div>
 
@@ -661,9 +662,9 @@
   </div>
 </div>
 
-<footer style="text-align: center; padding: 25px; color: #8C736A; font-size: 13.5px; position: relative; z-index: 1;">
+<footer style="text-align: center; padding: 25px; color: #8C756B; font-size: 13.5px; position: relative; z-index: 1;">
   made with ♡ · Tfour ʚ♡⃛ɞ<br>
-  <button id="openAdminReportsBtn" style="background:none; border:none; color:#FF9EBB; cursor:pointer; font-size:12px; margin-top:8px; text-decoration:underline;">🔒 ตรวจสอบรายงาน (-1)</button>
+  <button id="openAdminReportsBtn" style="background:none; border:none; color:#E07A5F; cursor:pointer; font-size:12px; margin-top:8px; text-decoration:underline;">🔒 ตรวจสอบรายงาน (-1)</button>
 </footer>
 
 <script>
@@ -711,7 +712,7 @@
 
     if (hasVoted) {
       plusOneCard.classList.add('voted');
-      plusOneStatus.innerHTML = `<b>${count}</b> โหวต · <span style="color:#FF5C8A;">กดแล้ว</span>`;
+      plusOneStatus.innerHTML = `<b>${count}</b> โหวต · <span style="color:#E07A5F;">กดแล้ว</span>`;
     } else {
       plusOneCard.classList.remove('voted');
       plusOneStatus.innerHTML = `<b>${count}</b> โหวต · กดเพื่อโหวต`;
@@ -792,7 +793,7 @@
       adminReportsList.innerHTML = '';
       
       if (!data) {
-        adminReportsList.innerHTML = '<div style="text-align:center; color:#8C736A; padding:20px;">ไม่มีรายการแจ้งปัญหาเข้ามาค่ะ ✨</div>';
+        adminReportsList.innerHTML = '<div style="text-align:center; color:#8C756B; padding:20px;">ไม่มีรายการแจ้งปัญหาเข้ามาค่ะ ✨</div>';
         return;
       }
 
@@ -805,7 +806,7 @@
         if (item.proofLink) {
           linkHTML = `<a href="${item.proofLink}" target="_blank" class="report-item-link">🔗 เปิดดูลิงก์หลักฐาน</a>`;
         } else {
-          linkHTML = `<span style="font-size:12px; color:#A08C85;">(ไม่มีลิงก์แนบ)</span>`;
+          linkHTML = `<span style="font-size:12px; color:#8C756B;">(ไม่มีลิงก์แนบ)</span>`;
         }
 
         div.innerHTML = `
@@ -836,7 +837,7 @@
     shopLikeCount.textContent = likes;
     
     if (localStorage.getItem('liked_shop') === 'true') {
-      shopLikeBtn.style.background = '#FF7B9C';
+      shopLikeBtn.style.background = '#E07A5F';
       shopLikeBtn.style.color = '#FFFFFF';
     } else {
       shopLikeBtn.style.background = '';
@@ -874,7 +875,7 @@
     const displayReviews = reviewsList.slice(0, visibleCount);
 
     if (displayReviews.length === 0) {
-      reviewGrid.innerHTML = '<div style="text-align:center; color:#8C736A; padding:20px;">ยังไม่มีรีวิว มาเป็นคนแรกกันเถอะ ✨</div>';
+      reviewGrid.innerHTML = '<div style="text-align:center; color:#8C756B; padding:20px;">ยังไม่มีรีวิว มาเป็นคนแรกกันเถอะ ✨</div>';
     }
 
     const likedReviews = JSON.parse(localStorage.getItem('liked_reviews') || '{}');
@@ -901,9 +902,9 @@
         <div class="review-msg">${rv.msg}</div>
         <div class="review-footer">
           <button class="like-btn" 
-                  style="${isLiked ? 'background:#FF7B9C; color:#FFF;' : ''}" 
+                  style="${isLiked ? 'background:#E07A5F; color:#FFF;' : ''}" 
                   onclick="toggleLike('${rv.key}', ${rv.likes || 0})">
-            <span>💖</span> ถูกใจ (<b>${rv.likes || 0}</b>)
+            <span>🧡</span> ถูกใจ (<b>${rv.likes || 0}</b>)
           </button>
         </div>
       `;
@@ -1025,7 +1026,7 @@
     if (now - lastSparkle > 100) {
       const heart = document.createElement('div');
       heart.className = 'heart-sparkle';
-      heart.textContent = ['🌸', '✨', '💖', '🎀', '☁️', '⭐'][Math.floor(Math.random() * 6)];
+      heart.textContent = ['🌸', '✨', '🧡', '🎀', '☁️', '⭐'][Math.floor(Math.random() * 6)];
       heart.style.left = e.clientX + 'px';
       heart.style.top = e.clientY + 'px';
       document.body.appendChild(heart);
