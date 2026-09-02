@@ -42,7 +42,7 @@
   }
   button{font-family:inherit;}
   
-  /* NAV ใสมองเห็นด้านหลัง */
+  /* NAV */
   .nav{
     position:sticky; top:0; z-index:50;
     background: rgba(255, 255, 255, 0.65);
@@ -104,7 +104,6 @@
     border: 1px dashed #FFCCD5;
   }
   
-  /* กล่องสถิติ + ปุ่มกดถูกใจร้าน */
   .hero-stats{
     margin-top:18px; 
     display:flex; 
@@ -126,7 +125,6 @@
   .stat b{font-size:18px; color:#FF7B9C;}
   .stat span{font-size:13px; color:var(--ink-soft);}
 
-  /* ปุ่มกดถูกใจร้านค้า */
   .shop-like-btn {
     background: linear-gradient(135deg, #FFF0F3 0%, #FFE3EA 100%);
     border: 1.5px solid #FFCCD5;
@@ -171,7 +169,6 @@
 
   .title-icon {width: 34px; height: 34px; object-fit: contain;}
 
-  /* ปุ่มเพิ่มเครดิต */
   .btn{
     border:none; cursor:pointer; font-size:14px; font-weight:700;
     padding:10px 22px; border-radius:30px;
@@ -211,7 +208,6 @@
   .review-time {font-size: 11.5px; color: #B39288; margin-top: 2px;}
   .review-msg{margin-top: 8px; color: #4A3E3D; font-size: 14.5px; word-break: break-word;}
 
-  /* ส่วนท้ายการ์ด: ปุ่มกด Like */
   .review-footer {
     margin-top: 12px;
     padding-top: 10px;
@@ -238,7 +234,6 @@
   }
   .delete-btn:hover { opacity: 1; }
 
-  /* ปุ่มดูรีวิวเพิ่มเติม */
   .load-more-btn {
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
@@ -254,7 +249,7 @@
   }
   .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; box-shadow: 0 4px 12px rgba(255, 179, 198, 0.2); }
 
-  /* เซกชันประวัติ/รูปปกเก่า */
+  /* เซกชันประวัติ/รูปปกเก่า (ปรับปรุงรองรับหลายรูปภาพและลิงก์ใหม่) */
   .old-credit-box {
     text-align: center;
     background: rgba(255, 255, 255, 0.9);
@@ -262,13 +257,19 @@
     padding: 20px;
     border: 2px dashed #FFCCD5;
   }
+  .old-credit-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    margin: 16px 0;
+  }
   .old-credit-img {
     width: 100%;
-    max-width: 500px;
+    max-width: 480px;
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     border: 4px solid #FFFFFF;
-    margin: 12px 0;
     transition: transform 0.3s ease;
   }
   .old-credit-img:hover {
@@ -281,9 +282,9 @@
     background: #06C755;
     color: white;
     text-decoration: none;
-    padding: 8px 20px;
+    padding: 10px 22px;
     border-radius: 25px;
-    font-size: 13.5px;
+    font-size: 14px;
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3);
     transition: all 0.2s ease;
@@ -292,6 +293,7 @@
   .line-link-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4);
+    background: #05b34c;
   }
 
   /* POPUP MODAL */
@@ -322,7 +324,7 @@
   .star-pick{display:flex; gap:8px; font-size:26px; cursor:pointer; color:#E2D9D5;}
   .star-pick span.active{color:#FFB703;}
 
-  /* เอฟเฟกต์หัวใจลอยตามเมาส์ */
+  /* เอฟเฟกต์หัวใจลอย */
   .heart-sparkle {
     position: fixed; pointer-events: none; font-size: 15px;
     animation: fadeAndFly 1s linear forwards; z-index: 9999;
@@ -374,22 +376,25 @@
       <button class="btn" id="openReviewBtn">✦ เพิ่มเครดิต</button>
     </div>
     
-    <!-- โซนแสดงรีวิว -->
     <div id="reviewGrid"></div>
     <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
 
-  <!-- โซนรูปปกเครดิตเก่าด้านล่างสุด -->
+  <!-- โซนรูปปกเครดิตเก่าด้านล่างสุด (อัปเดตรูปภาพ + ลิงก์ใหม่) -->
   <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.9) 0%, rgba(255, 230, 238, 0.85) 100%);">
     <div class="old-credit-box">
       <h3 style="color: #E07A5F; font-size: 18px;">• เครดิตไลน์เก่า / ประวัติร้าน •</h3>
       <p style="font-size: 13px; color: #8C736A; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
       
-      <!-- รูปปกเครดิตเก่า -->
-      <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า">
+      <!-- แสดงรูปภาพเครดิตเก่าทั้ง 2 ภาพ -->
+      <div class="old-credit-grid">
+        <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า 1">
+        <img class="old-credit-img" src="S__47308812.jpg" alt="รูปปกเครดิตเก่า 2">
+      </div>
       
       <div>
-        <a class="line-link-btn" href="https://linevoom.line.me/post/1166428808429267751" target="_blank">
+        <!-- ลิงก์ใหม่ที่ส่งมา -->
+        <a class="line-link-btn" href="https://linevoom.line.me/post/1172097030041339303" target="_blank">
           💚 ดูบอร์ดเครดิตเดิมบน Line Voom
         </a>
       </div>
@@ -433,8 +438,8 @@
 
 <script>
   const ADMIN_PASS = "1234";
-  const COOLDOWN_TIME = 10 * 60 * 1000; // คูลดาวน์ 10 นาที
-  const PAGE_SIZE = 5; // แสดงทีละ 5 รีวิว
+  const COOLDOWN_TIME = 10 * 60 * 1000;
+  const PAGE_SIZE = 5;
 
   let visibleCount = PAGE_SIZE;
   let selectedStars = 5;
@@ -452,7 +457,6 @@
   const shopLikeCount = document.getElementById('shopLikeCount');
   const shopHeartIcon = document.getElementById('shopHeartIcon');
 
-  // โหลดระบบถูกใจร้าน
   let storeLikes = Number(localStorage.getItem('tfour_store_likes')) || 0;
   let isStoreLiked = localStorage.getItem('tfour_store_liked_by_user') === 'true';
 
@@ -481,7 +485,6 @@
     updateShopLikeUI();
   });
 
-  // โหลดข้อมูลรีวิว
   let reviews = JSON.parse(localStorage.getItem('tfour_reviews_v2')) || [
     { 
       id: 1, 
@@ -502,7 +505,6 @@
       const card = document.createElement('div');
       card.className = 'review-card';
 
-      // เช็กการกด Like ในเครื่อง
       const likedKey = `liked_${rv.id}`;
       const isLiked = localStorage.getItem(likedKey);
 
@@ -524,14 +526,12 @@
       reviewGrid.appendChild(card);
     });
 
-    // ปุ่มดูเพิ่มเติม
     if (reviews.length > visibleCount) {
       loadMoreBtn.style.display = 'block';
     } else {
       loadMoreBtn.style.display = 'none';
     }
 
-    // คำนวณสถิติ
     statCount.textContent = reviews.length;
     if (reviews.length > 0) {
       const totalStars = reviews.reduce((sum, r) => sum + r.stars, 0);
@@ -543,7 +543,6 @@
     localStorage.setItem('tfour_reviews_v2', JSON.stringify(reviews));
   }
 
-  // ระบบกด Like / ถูกใจ การ์ดรีวิว
   function toggleLike(index) {
     const rv = reviews[index];
     const likedKey = `liked_${rv.id}`;
@@ -559,7 +558,6 @@
     renderReviews();
   }
 
-  // ระบบลบรีวิว
   function deleteReview(index) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อลบรีวิวนี้:");
     if (password === ADMIN_PASS) {
@@ -571,20 +569,17 @@
     }
   }
 
-  // ปุ่มดูเพิ่มเติม
   loadMoreBtn.addEventListener('click', () => {
     visibleCount += PAGE_SIZE;
     renderReviews();
   });
 
-  // เปิด-ปิด Modal
   openBtn.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
   overlay.addEventListener('click', (e) => {
     if(e.target === overlay) overlay.classList.remove('open');
   });
 
-  // เลือกดาว
   starPick.addEventListener('click', (e) => {
     if(e.target.dataset.v) {
       selectedStars = Number(e.target.dataset.v);
@@ -596,7 +591,6 @@
     }
   });
 
-  // บันทึกรีวิวใหม่ (คูลดาวน์ 10 นาที)
   submitBtn.addEventListener('click', () => {
     const lastPostTime = localStorage.getItem('last_review_time');
     const now = Date.now();
@@ -617,7 +611,6 @@
       return;
     }
 
-    // สร้างรูปแบบ วันที่/เวลา
     const dateObj = new Date();
     const dateStr = dateObj.toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const timeStr = dateObj.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
@@ -639,7 +632,6 @@
     overlay.classList.remove('open');
   });
 
-  // เอฟเฟกต์วิ้งค์ๆ ลอยตามเมาส์
   let lastSparkle = 0;
   document.addEventListener('mousemove', (e) => {
     const now = Date.now();
