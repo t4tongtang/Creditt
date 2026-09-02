@@ -54,8 +54,8 @@
 
   .floating-item {
     position: absolute;
-    bottom: -80px; /* เริ่มลอยจากใต้ขอบล่างของหน้าจอ */
-    opacity: 0.3;  /* ปรับความจาง (0.25 - 0.35 กำลังละมุนตา) */
+    bottom: -150px; /* ขยับจุดเริ่มลอยลงไปเผื่อรองรับขนาดรูปที่ใหญ่ขึ้น 2 เท่า */
+    opacity: 0.3;   /* ปรับความจางของรูปภาพ */
     animation: floatUp linear infinite;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.04));
   }
@@ -72,7 +72,7 @@
       opacity: 0.32;
     }
     100% {
-      transform: translateY(-115vh) rotate(20deg);
+      transform: translateY(-125vh) rotate(20deg);
       opacity: 0;
     }
   }
@@ -498,18 +498,19 @@
 </head>
 <body>
 
-<!-- 🌸 ส่วนพื้นหลังไอคอนลอย (Floating Background Icons) -->
+<!-- 🌸 ส่วนพื้นหลังไอคอนลอย (ปรับขนาดเพิ่มเป็น 2 เท่าแล้วค่ะ) -->
 <div class="floating-bg-container">
-  <img src="ไม่มีชื่อ 111_20251130233923.png" class="floating-item" style="left: 5%; width: 45px; animation-duration: 14s; animation-delay: 0s;">
-  <img src="ไม่มีชื่อ 111_20251130233930.png" class="floating-item" style="left: 18%; width: 38px; animation-duration: 11s; animation-delay: 4s;">
-  <img src="ไม่มีชื่อ 111_20251130233934.png" class="floating-item" style="left: 28%; width: 35px; animation-duration: 16s; animation-delay: 2s;">
-  <img src="ไม่มีชื่อ 111_20251130233938.png" class="floating-item" style="left: 40%; width: 40px; animation-duration: 13s; animation-delay: 7s;">
-  <img src="ไม่มีชื่อ 335_20260402161126.png" class="floating-item" style="left: 52%; width: 48px; animation-duration: 15s; animation-delay: 1s;">
-  <img src="ไม่มีชื่อ 335_20260402161316.png" class="floating-item" style="left: 64%; width: 36px; animation-duration: 12s; animation-delay: 5s;">
-  <img src="ไม่มีชื่อ 335_20260402170103.png" class="floating-item" style="left: 75%; width: 40px; animation-duration: 14s; animation-delay: 3s;">
-  <img src="ไม่มีชื่อ 3770_20250924213138.png" class="floating-item" style="left: 85%; width: 45px; animation-duration: 17s; animation-delay: 8s;">
-  <img src="ไม่มีชื่อ 3770_20250924213810.png" class="floating-item" style="left: 92%; width: 38px; animation-duration: 10s; animation-delay: 6s;">
-  <img src="ไม่มีชื่อ 3770_20250924215845.png" class="floating-item" style="left: 33%; width: 44px; animation-duration: 13s; animation-delay: 10s;">
+  <img src="ไม่มีชื่อ 111_20251130233923.png" class="floating-item" style="left: 4%; width: 90px; animation-duration: 14s; animation-delay: 0s;">
+  <img src="ไม่มีชื่อ 111_20251130233930.png" class="floating-item" style="left: 16%; width: 76px; animation-duration: 11s; animation-delay: 4s;">
+  <img src="```html
+  <img src="ไม่มีชื่อ 111_20251130233934.png" class="floating-item" style="left: 28%; width: 70px; animation-duration: 16s; animation-delay: 2s;">
+  <img src="ไม่มีชื่อ 111_20251130233938.png" class="floating-item" style="left: 40%; width: 80px; animation-duration: 13s; animation-delay: 7s;">
+  <img src="ไม่มีชื่อ 335_20260402161126.png" class="floating-item" style="left: 52%; width: 96px; animation-duration: 15s; animation-delay: 1s;">
+  <img src="ไม่มีชื่อ 335_20260402161316.png" class="floating-item" style="left: 64%; width: 72px; animation-duration: 12s; animation-delay: 5s;">
+  <img src="ไม่มีชื่อ 335_20260402170103.png" class="floating-item" style="left: 75%; width: 80px; animation-duration: 14s; animation-delay: 3s;">
+  <img src="ไม่มีชื่อ 3770_20250924213138.png" class="floating-item" style="left: 85%; width: 90px; animation-duration: 17s; animation-delay: 8s;">
+  <img src="ไม่มีชื่อ 3770_20250924213810.png" class="floating-item" style="left: 92%; width: 76px; animation-duration: 10s; animation-delay: 6s;">
+  <img src="ไม่มีชื่อ 3770_20250924215845.png" class="floating-item" style="left: 33%; width: 88px; animation-duration: 13s; animation-delay: 10s;">
 </div>
 
 <nav class="nav">
@@ -589,7 +590,7 @@
       </div>
       
       <div>
-        <a class="line-link-btn" href="https://linevoom.line.me/post/1166428808429267751" target="_blank">
+        <a class="line-link-btn" href="[https://linevoom.line.me/post/1166428808429267751](https://linevoom.line.me/post/1166428808429267751)" target="_blank">
           💚 ดูบอร์ดเครดิตเดิมบน Line Voom
         </a>
       </div>
@@ -670,7 +671,7 @@
   const firebaseConfig = {
     apiKey: "AIzaSyCvGQ0xBtvJL4vlZsLlEnRxK-7mM0EAG20",
     authDomain: "tfour-credit.firebaseapp.com",
-    databaseURL: "https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app",
+    databaseURL: "[https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app](https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app)",
     projectId: "tfour-credit",
     storageBucket: "tfour-credit.firebasestorage.app",
     messagingSenderId: "741580877981",
