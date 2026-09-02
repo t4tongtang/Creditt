@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Tfour ʚ♡⃛ɞ | เก็บบอร์ดเครดิตร้าน</title>
+<title>Tfour ʚ♡⃛ɞ | เครดิตร้าน</title>
 
+<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
@@ -218,11 +219,12 @@
   }
   .like-btn:hover { background: #FFE3EA; transform: scale(1.05); }
 
-  .delete-btn {
+  .action-btn-group { display: flex; gap: 6px; }
+  .icon-btn {
     background: none; border: none; cursor: pointer;
     font-size: 14px; opacity: 0.35; transition: opacity 0.2s;
   }
-  .delete-btn:hover { opacity: 1; }
+  .icon-btn:hover { opacity: 1; }
 
   .load-more-btn {
     width: 100%;
@@ -324,7 +326,8 @@
   </div>
   <div class="hero-text">
     <h1 class="hero-name">Tfour ʚ♡⃛ɞ</h1>
-    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
+    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ </p>
+    <p class="hero-tag">ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
     <div class="hero-stats">
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
@@ -441,17 +444,33 @@
   const shopLikeBtn = document.getElementById('shopLikeBtn');
   const shopLikeCount = document.getElementById('shopLikeCount');
 
+  // --- ระบบกดหัวใจร้านค้า (จำกัด 1 เครื่อง / 1 ครั้ง) ---
   db.ref('shopLikes').on('value', (snapshot) => {
     const likes = snapshot.val() || 0;
     shopLikeCount.textContent = likes;
+    
+    if (localStorage.getItem('liked_shop') === 'true') {
+      shopLikeBtn.style.background = '#FF7B9C';
+      shopLikeBtn.style.color = '#FFFFFF';
+    } else {
+      shopLikeBtn.style.background = '';
+      shopLikeBtn.style.color = '';
+    }
   });
 
   shopLikeBtn.addEventListener('click', () => {
-    db.ref('shopLikes').transaction((currentLikes) => {
-      return (currentLikes || 0) + 1;
-    });
+    const hasLiked = localStorage.getItem('liked_shop') === 'true';
+
+    if (!hasLiked) {
+      db.ref('shopLikes').transaction(c => (c || 0) + 1);
+      localStorage.setItem('liked_shop', 'true');
+    } else {
+      db.ref('shopLikes').transaction(c => Math.max(0, (c || 1) - 1));
+      localStorage.removeItem('liked_shop');
+    }
   });
 
+  // --- ดึงข้อมูลรีวิว ---
   db.ref('reviews').on('value', (snapshot) => {
     const data = snapshot.val();
     reviewsList = [];
@@ -472,10 +491,16 @@
       reviewGrid.innerHTML = '<div style="text-align:center; color:#8C736A; padding:20px;">ยังไม่มีรีวิว มาเป็นคนแรกกันเถอะ ✨</div>';
     }
 
+    const likedReviews = JSON.parse(localStorage.getItem('liked_reviews') || '{}');
+
     displayReviews.forEach((rv) => {
       const starStr = '★'.repeat(rv.stars);
+      const isLiked = likedReviews[rv.key] === true;
       const card = document.createElement('div');
       card.className = 'review-card';
+
+      // ป้องกันการแทรกอักขระพิเศษในแท็ก HTML
+      const safeMsg = rv.msg.replace(/"/g, '&quot;');
 
       card.innerHTML = `
         <div class="review-header">
@@ -483,11 +508,16 @@
             <div class="review-user"><b>คุณ${rv.name}</b> <span style="color:#FFB703; margin-left:4px;">${starStr}</span></div>
             <div class="review-time">🕒 ${rv.time}</div>
           </div>
-          <button class="delete-btn" onclick="deleteReview('${rv.key}')" title="ลบรีวิว (แอดมิน)">🗑️</button>
+          <div class="action-btn-group">
+            <button class="icon-btn" onclick="editReview('${rv.key}', '${safeMsg}')" title="แก้ไขข้อความ (แอดมิน)">✏️</button>
+            <button class="icon-btn" onclick="deleteReview('${rv.key}')" title="ลบรีวิว (แอดมิน)">🗑️</button>
+          </div>
         </div>
         <div class="review-msg">${rv.msg}</div>
         <div class="review-footer">
-          <button class="like-btn" onclick="toggleLike('${rv.key}', ${rv.likes || 0})">
+          <button class="like-btn" 
+                  style="${isLiked ? 'background:#FF7B9C; color:#FFF;' : ''}" 
+                  onclick="toggleLike('${rv.key}', ${rv.likes || 0})">
             <span>💖</span> ถูกใจ (<b>${rv.likes || 0}</b>)
           </button>
         </div>
@@ -510,10 +540,36 @@
     }
   }
 
-  function toggleLike(key, currentLikes) {
-    db.ref('reviews/' + key + '/likes').set(currentLikes + 1);
+  // --- ระบบแก้ไขข้อความรีวิว (แอดมิน) ---
+  function editReview(key, currentMsg) {
+    const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อแก้ไขข้อความ:");
+    if (password === ADMIN_PASS) {
+      const newMsg = prompt("แก้ไขข้อความรีวิว:", currentMsg);
+      if (newMsg !== null && newMsg.trim() !== "") {
+        db.ref('reviews/' + key + '/msg').set(newMsg.trim());
+        alert("แก้ไขข้อความเรียบร้อยแล้วค่ะ! ✨");
+      }
+    } else if (password !== null) {
+      alert("รหัสผ่านไม่ถูกต้อง!");
+    }
   }
 
+  // --- ระบบกดหัวใจรีวิว (จำกัด 1 เครื่อง / 1 ครั้งต่อรีวิว) ---
+  function toggleLike(key, currentLikes) {
+    const likedReviews = JSON.parse(localStorage.getItem('liked_reviews') || '{}');
+    const isLiked = likedReviews[key] === true;
+
+    if (!isLiked) {
+      db.ref('reviews/' + key + '/likes').set(currentLikes + 1);
+      likedReviews[key] = true;
+    } else {
+      db.ref('reviews/' + key + '/likes').set(Math.max(0, currentLikes - 1));
+      delete likedReviews[key];
+    }
+    localStorage.setItem('liked_reviews', JSON.stringify(likedReviews));
+  }
+
+  // --- ระบบลบรีวิว (แอดมิน) ---
   function deleteReview(key) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อลบรีวิวนี้:");
     if (password === ADMIN_PASS) {
