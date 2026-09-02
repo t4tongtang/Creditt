@@ -10,14 +10,14 @@
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Mali:wght@400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Mali:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
 
   :root{
     --paper:#FFFDF9;
     --ink:#5A4A42;
     --ink-soft:#8C736A;
     --rose-pink:#FFB3C6;
-    --card-bg: rgba(255, 245, 247, 0.85);
+    --card-bg: rgba(255, 255, 255, 0.9);
     --card-border: #FFE3EA;
     --white:#FFFFFF;
   }
@@ -25,14 +25,14 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   
+  /* ลายตารางพาสเทล */
   body{
     margin:0;
-    background-color: #FFF7F9;
+    background-color: #FFF2F5;
     background-image: 
-      radial-gradient(#FFB3C6 1.2px, transparent 1.2px), 
-      radial-gradient(#FFCCD5 1.2px, #FFF7F9 1.2px);
+      linear-gradient(rgba(255, 182, 193, 0.25) 1.5px, transparent 1.5px),
+      linear-gradient(90deg, rgba(255, 182, 193, 0.25) 1.5px, transparent 1.5px);
     background-size: 24px 24px;
-    background-position: 0 0, 12px 12px;
     color:var(--ink);
     font-family:'Mali', cursive, sans-serif;
     line-height:1.6;
@@ -49,10 +49,10 @@
   
   .nav{
     position:sticky; top:0; z-index:50;
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 2px dashed rgba(255, 182, 193, 0.8);
+    border-bottom: 2.5px dashed rgba(255, 182, 193, 0.8);
     box-shadow: 0 4px 20px rgba(255, 179, 198, 0.2);
   }
   .nav-inner{
@@ -100,11 +100,12 @@
     margin-top:8px; color:var(--ink-soft); font-size:15px; 
     max-width:55ch; margin-left:auto; margin-right:auto; 
     word-break: break-word;
-    background: rgba(255, 255, 255, 0.7);
-    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 6px 18px;
     border-radius: 20px;
     display: inline-block;
-    border: 1px dashed #FFCCD5;
+    border: 1.5px dashed #FFCCD5;
+    box-shadow: 0 4px 10px rgba(255, 179, 198, 0.15);
   }
   
   .hero-stats{
@@ -149,39 +150,151 @@
   }
 
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+  /* ------------------ ดีไซน์ปุ่ม Plus One & Minus One สไตล์ตามรูป ------------------ */
+  .vote-cards-wrapper {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
   
+  .vote-card {
+    flex: 1;
+    background: #FFFFFF;
+    border-radius: 20px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 10px 25px rgba(255, 182, 193, 0.25);
+    border: 1px solid rgba(255, 218, 224, 0.6);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+  .vote-card::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 182, 193, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .vote-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(255, 154, 178, 0.35);
+  }
+  .vote-card:active {
+    transform: scale(0.98);
+  }
+
+  /* ปุ่มตัวเลขสีชมพูละมุน */
+  .badge-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #FFE5EC 0%, #FFCCD5 100%);
+    color: #FF5C8A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    position: relative;
+    flex-shrink: 0;
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.8), 0 4px 10px rgba(255, 92, 138, 0.15);
+  }
+  
+  /* ไอคอนเล็กๆ มุมขวาบนของ badge */
+  .badge-icon::before {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .badge-plus::before { content: '♡'; color: #FF5C8A; }
+  .badge-minus::before { content: '+'; color: #FF5C8A; font-weight: bold; }
+
+  .vote-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .vote-title {
+    font-family: 'Plus Jakarta Sans', 'Mali', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
+    color: #2D2321;
+    line-height: 1.2;
+  }
+  .vote-desc {
+    font-size: 12px;
+    color: #A08C85;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* เมื่อกด Plus One แล้ว */
+  .vote-card.voted {
+    border-color: #FF85A1;
+    background: #FFF5F7;
+  }
+  .vote-card.voted .badge-icon {
+    background: #FF5C8A;
+    color: #FFFFFF;
+  }
+
+  @media (max-width: 520px) {
+    .vote-cards-wrapper { flex-direction: column; gap: 12px; }
+  }
+
+  /* ------------------ ส่วนรีวิว & กล่องเนื้อหา ------------------ */
   .wrap-section {
     padding: 24px;
     margin-bottom: 25px;
     border-radius: 28px;
-    box-shadow: 0 10px 30px rgba(255, 179, 198, 0.2);
-    background: linear-gradient(180deg, rgba(255, 250, 252, 0.95) 0%, rgba(255, 235, 240, 0.9) 100%);
+    box-shadow: 0 10px 30px rgba(255, 179, 198, 0.25);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 240, 245, 0.9) 100%);
     border: 2px solid #FFD6E0;
     backdrop-filter: blur(8px);
   }
-  .section-head{margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
-  .section-head h2{font-size:22px; display: flex; align-items: center; gap: 8px; color: #5A4A42;}
-  .section-sub{color:var(--ink-soft); font-size:13.5px;}
+  .section-head{margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap;}
+  .section-head h2{font-size:20px; display: flex; align-items: center; gap: 8px; color: #5A4A42;}
+  .section-sub{color:var(--ink-soft); font-size:13px;}
 
-  .title-icon {width: 34px; height: 34px; object-fit: contain;}
+  .title-icon {width: 32px; height: 32px; object-fit: contain;}
 
   .btn{
-    border:none; cursor:pointer; font-size:14px; font-weight:700;
-    padding:10px 22px; border-radius:30px;
+    border:none; cursor:pointer; font-size:13.5px; font-weight:700;
+    padding:8px 18px; border-radius:30px;
     background: linear-gradient(135deg, #FF9EBB 0%, #FF6B8B 100%);
     color:var(--white);
-    box-shadow: 0 4px 15px rgba(255, 107, 139, 0.4);
+    box-shadow: 0 4px 15px rgba(255, 107, 139, 0.35);
     transition: all 0.25s ease;
     display: inline-flex; align-items: center; gap: 4px;
   }
   .btn:hover{
     transform: translateY(-2px) scale(1.03); 
-    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.5);
+    box-shadow: 0 8px 20px rgba(255, 107, 139, 0.45);
   }
 
   .review-card{
     background: rgba(255, 255, 255, 0.95); 
-    border-radius: 20px; 
+    border-radius: 22px; 
     padding: 18px 20px; 
     margin-bottom: 14px;
     border: 1.5px dashed #FFCCD5;
@@ -241,41 +354,60 @@
   }
   .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; }
 
+  /* กล่องเครดิตเก่า Polaroid */
   .old-credit-box {
     text-align: center;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 22px;
-    padding: 20px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 24px;
+    padding: 24px 20px;
     border: 2px dashed #FFCCD5;
   }
   .old-credit-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 22px;
     align-items: center;
-    margin: 16px 0;
+    margin: 20px 0;
   }
-  .old-credit-img {
-    width: 100%;
+  
+  .polaroid-frame {
+    position: relative;
+    background: #FFFFFF;
+    padding: 10px 10px 18px 10px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(255, 179, 198, 0.3);
+    border: 1px solid #FFE3EA;
+    transition: transform 0.3s ease;
     max-width: 480px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    border: 4px solid #FFFFFF;
+    width: 100%;
   }
-  .line-link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: #06C755;
-    color: white;
-    text-decoration: none;
-    padding: 10px 22px;
-    border-radius: 25px;
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3);
+  .polaroid-frame:hover { transform: rotate(-1deg) scale(1.02); }
+
+  .polaroid-frame::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 22px;
+    background: rgba(255, 182, 193, 0.6);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    backdrop-filter: blur(2px);
   }
 
+  .old-credit-img { width: 100%; border-radius: 8px; display: block; }
+
+  .line-link-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #06C755; color: white; text-decoration: none;
+    padding: 10px 24px; border-radius: 25px; font-size: 14px; font-weight: bold;
+    box-shadow: 0 4px 14px rgba(6, 199, 85, 0.35); transition: all 0.25s ease;
+  }
+  .line-link-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 6px 18px rgba(6, 199, 85, 0.45); }
+
+  /* Overlay Modal */
   .overlay{
     position:fixed; inset:0; background:rgba(90, 74, 66, 0.35);
     backdrop-filter: blur(5px);
@@ -285,7 +417,7 @@
   .overlay.open{display:flex;}
   .modal{
     width:100%; max-width:440px; background:var(--white);
-    border-radius:24px; padding:24px; 
+    border-radius:26px; padding:24px; 
     box-shadow:0 15px 35px rgba(255, 123, 156, 0.3);
     border: 2px solid #FFE3EA;
   }
@@ -326,8 +458,7 @@
   </div>
   <div class="hero-text">
     <h1 class="hero-name">Tfour ʚ♡⃛ɞ</h1>
-    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ </p>
-    <p class="hero-tag">ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
+    <p class="hero-tag">เริ่มเก็บเครดิต =͟͟͞͞♡🐰˚ <br> ฝาก +1 หลังใช้บริการด้วยนะคะ ꔛ 𓈒 *</p>
     <div class="hero-stats">
       <div class="stat"><b id="statAvg">5.0</b> <span>★ คะแนนร้าน</span></div>
       <div class="stat"><b id="statCount">0</b> <span>💬 รีวิวทั้งหมด</span></div>
@@ -340,30 +471,54 @@
 
 <div class="main-container">
 
+  <!-- 🌸 การ์ดปุ่ม Plus one & Minus one สไตล์ตามภาพที่แนบ -->
+  <div class="vote-cards-wrapper">
+    <div class="vote-card" id="plusOneCard">
+      <div class="badge-icon badge-plus">+1</div>
+      <div class="vote-info">
+        <div class="vote-title">Plus one</div>
+        <div class="vote-desc" id="plusOneStatus"><b>0</b> โหวต · กดเลย</div>
+      </div>
+    </div>
+
+    <div class="vote-card" id="minusOneCard">
+      <div class="badge-icon badge-minus">-1</div>
+      <div class="vote-info">
+        <div class="vote-title">Minus one</div>
+        <div class="vote-desc">ส่งหลักฐานให้ร้านตรวจสอบ</div>
+      </div>
+    </div>
+  </div>
+
   <section class="wrap-section">
     <div class="section-head">
       <div>
+        <div style="font-size: 11px; letter-spacing: 1px; color: #FF9EBB; font-weight: 700; text-transform: uppercase;">CUSTOMER REVIEWS</div>
         <h2>
           <img class="title-icon" src="Untitled Design - 1 - Edited.png" alt="รีวิว">
-          เครดิต & รีวิวจากลูกค้า
+          Reviews
         </h2>
-        <div class="section-sub">แชร์ความประทับใจหรือการบริการได้ที่นี่น้า</div>
+        <div class="section-sub">แชร์ความประทับใจหรือการบริการได้ที่นี่น้า ✨</div>
       </div>
-      <button class="btn" id="openReviewBtn">✦ เพิ่มเครดิต</button>
+      <button class="btn" id="openReviewBtn">+ Write a review</button>
     </div>
     
     <div id="reviewGrid">กำลังโหลดรีวิว...</div>
     <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
 
-  <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.9) 0%, rgba(255, 230, 238, 0.85) 100%);">
+  <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.95) 0%, rgba(255, 230, 238, 0.9) 100%);">
     <div class="old-credit-box">
       <h3 style="color: #E07A5F; font-size: 18px;">• เครดิตไลน์เก่า / ประวัติร้าน •</h3>
       <p style="font-size: 13px; color: #8C736A; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
       
       <div class="old-credit-grid">
-        <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า 1">
-        <img class="old-credit-img" src="S__47308812.jpg" alt="รูปปกเครดิตเก่า 2">
+        <div class="polaroid-frame">
+          <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า 1">
+        </div>
+        <div class="polaroid-frame">
+          <img class="old-credit-img" src="S__47308812.jpg" alt="รูปปกเครดิตเก่า 2">
+        </div>
       </div>
       
       <div>
@@ -376,6 +531,7 @@
 
 </div>
 
+<!-- Modal สำหรับเขียนรีวิว -->
 <div class="overlay" id="reviewOverlay">
   <div class="modal">
     <div class="modal-head">
@@ -404,12 +560,35 @@
   </div>
 </div>
 
+<!-- Modal สำหรับ Minus One (แจ้งหลักฐาน) -->
+<div class="overlay" id="minusOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 style="color: #E07A5F;">➖ Minus One (ส่งหลักฐาน)</h3>
+      <button class="modal-close" id="closeMinusBtn">×</button>
+    </div>
+    <div class="field">
+      <label>ชื่อผู้แจ้ง / ชื่อลูกค้า</label>
+      <input type="text" id="mnName" placeholder="เช่น คุณส้ม">
+    </div>
+    <div class="field">
+      <label>รายละเอียดปัญหา / เรื่องที่พบ</label>
+      <textarea id="mnMsg" placeholder="พิมพ์รายละเอียดที่ต้องการให้ร้านตรวจสอบ..."></textarea>
+    </div>
+    <div class="field">
+      <label>แนบลิงก์รูปหลักฐาน (เช่น ลิงก์ Drive / Imgur / รูปภาพ)</label>
+      <input type="url" id="mnProofLink" placeholder="https://...">
+    </div>
+    <button class="btn" id="submitMinusBtn" style="width:100%; justify-content:center; margin-top:10px; background: linear-gradient(135deg, #FF7B9C 0%, #E07A5F 100%);">ส่งหลักฐานให้ร้านตรวจสอบ 💌</button>
+  </div>
+</div>
+
 <footer style="text-align: center; padding: 25px; color: #8C736A; font-size: 13.5px;">
   made with ♡ · Tfour ʚ♡⃛ɞ
 </footer>
 
 <script>
-  // ชุดข้อมูลเชื่อมต่อ Firebase ของคุณ
+  // ชุดข้อมูลเชื่อมต่อ Firebase
   const firebaseConfig = {
     apiKey: "AIzaSyCvGQ0xBtvJL4vlZsLlEnRxK-7mM0EAG20",
     authDomain: "tfour-credit.firebaseapp.com",
@@ -444,7 +623,74 @@
   const shopLikeBtn = document.getElementById('shopLikeBtn');
   const shopLikeCount = document.getElementById('shopLikeCount');
 
-  // --- ระบบกดหัวใจร้านค้า (จำกัด 1 เครื่อง / 1 ครั้ง) ---
+  // --- ระบบ Plus One (+1) จำกัด 1 ครั้งต่อเครื่อง ---
+  const plusOneCard = document.getElementById('plusOneCard');
+  const plusOneStatus = document.getElementById('plusOneStatus');
+
+  db.ref('plusOneCount').on('value', (snapshot) => {
+    const count = snapshot.val() || 0;
+    const hasVoted = localStorage.getItem('has_voted_plus_one') === 'true';
+
+    if (hasVoted) {
+      plusOneCard.classList.add('voted');
+      plusOneStatus.innerHTML = `<b>${count}</b> โหวต · <span style="color:#FF5C8A;">กดแล้ว</span>`;
+    } else {
+      plusOneCard.classList.remove('voted');
+      plusOneStatus.innerHTML = `<b>${count}</b> โหวต · กดเพื่อโหวต`;
+    }
+  });
+
+  plusOneCard.addEventListener('click', () => {
+    const hasVoted = localStorage.getItem('has_voted_plus_one') === 'true';
+
+    if (!hasVoted) {
+      db.ref('plusOneCount').transaction(c => (c || 0) + 1);
+      localStorage.setItem('has_voted_plus_one', 'true');
+    } else {
+      db.ref('plusOneCount').transaction(c => Math.max(0, (c || 1) - 1));
+      localStorage.removeItem('has_voted_plus_one');
+    }
+  });
+
+  // --- ระบบ Minus One (-1) ส่งหลักฐาน ---
+  const minusOneCard = document.getElementById('minusOneCard');
+  const minusOverlay = document.getElementById('minusOverlay');
+  const closeMinusBtn = document.getElementById('closeMinusBtn');
+  const submitMinusBtn = document.getElementById('submitMinusBtn');
+
+  minusOneCard.addEventListener('click', () => minusOverlay.classList.add('open'));
+  closeMinusBtn.addEventListener('click', () => minusOverlay.classList.remove('open'));
+
+  submitMinusBtn.addEventListener('click', () => {
+    const name = document.getElementById('mnName').value.trim();
+    const msg = document.getElementById('mnMsg').value.trim();
+    const link = document.getElementById('mnProofLink').value.trim();
+
+    if (!name || !msg) {
+      alert('กรุณากรอกชื่อและรายละเอียดปัญหาด้วยนะคะ');
+      return;
+    }
+
+    const dateObj = new Date();
+    const dateStr = dateObj.toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const timeStr = dateObj.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+
+    db.ref('minusReports').push({
+      name: name,
+      msg: msg,
+      proofLink: link || 'ไม่มีลิงก์',
+      time: `${dateStr} ${timeStr}`,
+      timestamp: Date.now()
+    });
+
+    alert('ส่งเรื่องให้ทางร้านเรียบร้อยแล้วค่ะ ร้านจะรีบตรวจสอบให้นะคะ 🌸');
+    document.getElementById('mnName').value = '';
+    document.getElementById('mnMsg').value = '';
+    document.getElementById('mnProofLink').value = '';
+    minusOverlay.classList.remove('open');
+  });
+
+  // --- ระบบกดหัวใจร้านค้า ---
   db.ref('shopLikes').on('value', (snapshot) => {
     const likes = snapshot.val() || 0;
     shopLikeCount.textContent = likes;
@@ -499,7 +745,6 @@
       const card = document.createElement('div');
       card.className = 'review-card';
 
-      // ป้องกันการแทรกอักขระพิเศษในแท็ก HTML
       const safeMsg = rv.msg.replace(/"/g, '&quot;');
 
       card.innerHTML = `
@@ -540,7 +785,6 @@
     }
   }
 
-  // --- ระบบแก้ไขข้อความรีวิว (แอดมิน) ---
   function editReview(key, currentMsg) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อแก้ไขข้อความ:");
     if (password === ADMIN_PASS) {
@@ -554,7 +798,6 @@
     }
   }
 
-  // --- ระบบกดหัวใจรีวิว (จำกัด 1 เครื่อง / 1 ครั้งต่อรีวิว) ---
   function toggleLike(key, currentLikes) {
     const likedReviews = JSON.parse(localStorage.getItem('liked_reviews') || '{}');
     const isLiked = likedReviews[key] === true;
@@ -569,7 +812,6 @@
     localStorage.setItem('liked_reviews', JSON.stringify(likedReviews));
   }
 
-  // --- ระบบลบรีวิว (แอดมิน) ---
   function deleteReview(key) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อลบรีวิวนี้:");
     if (password === ADMIN_PASS) {
