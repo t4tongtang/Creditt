@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tfour ʚ♡⃛ɞ | เก็บบอร์ดเครดิตร้าน</title>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Chonburi&family=Mali:wght@400;600;700&display=swap');
 
@@ -42,7 +46,6 @@
   }
   button{font-family:inherit;}
   
-  /* NAV */
   .nav{
     position:sticky; top:0; z-index:50;
     background: rgba(255, 255, 255, 0.65);
@@ -61,7 +64,6 @@
     text-shadow: 0 0 10px rgba(255, 179, 198, 0.6);
   }
 
-  /* HERO HEADER */
   .hero{position:relative; padding-bottom:30px; text-align: center;}
   .banner{
     width:100%; height:210px; object-fit:cover; display:block;
@@ -143,15 +145,8 @@
     background: #FF7B9C;
     color: white;
     border-color: #FF7B9C;
-    box-shadow: 0 6px 18px rgba(255, 123, 156, 0.4);
-  }
-  .shop-like-btn.liked {
-    background: #FF7B9C;
-    color: white;
-    border-color: #FF7B9C;
   }
 
-  /* REVIEWS & CONTENT SECTION */
   .main-container { max-width: 720px; margin: 0 auto; padding: 0 16px; }
   
   .wrap-section {
@@ -182,9 +177,7 @@
     transform: translateY(-2px) scale(1.03); 
     box-shadow: 0 8px 20px rgba(255, 107, 139, 0.5);
   }
-  .btn:active{transform:scale(0.96);}
 
-  /* การ์ดรีวิว */
   .review-card{
     background: rgba(255, 255, 255, 0.95); 
     border-radius: 20px; 
@@ -201,9 +194,7 @@
     background: #FFFFFF;
     border-color: #FFB3C6;
   }
-  .review-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-  }
+  .review-header { display: flex; justify-content: space-between; align-items: flex-start; }
   .review-user{font-size: 15px; color: #E07A5F;}
   .review-time {font-size: 11.5px; color: #B39288; margin-top: 2px;}
   .review-msg{margin-top: 8px; color: #4A3E3D; font-size: 14.5px; word-break: break-word;}
@@ -226,7 +217,6 @@
     display: flex; align-items: center; gap: 4px;
   }
   .like-btn:hover { background: #FFE3EA; transform: scale(1.05); }
-  .like-btn.liked { background: #FF7B9C; color: white; border-color: #FF7B9C; }
 
   .delete-btn {
     background: none; border: none; cursor: pointer;
@@ -247,9 +237,8 @@
     transition: all 0.2s;
     margin-top: 10px;
   }
-  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; box-shadow: 0 4px 12px rgba(255, 179, 198, 0.2); }
+  .load-more-btn:hover { background: #FFFFFF; border-color: #FF7B9C; }
 
-  /* เซกชันประวัติ/รูปปกเก่า (ปรับปรุงรองรับหลายรูปภาพและลิงก์ใหม่) */
   .old-credit-box {
     text-align: center;
     background: rgba(255, 255, 255, 0.9);
@@ -270,10 +259,6 @@
     border-radius: 16px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     border: 4px solid #FFFFFF;
-    transition: transform 0.3s ease;
-  }
-  .old-credit-img:hover {
-    transform: scale(1.02);
   }
   .line-link-btn {
     display: inline-flex;
@@ -287,16 +272,8 @@
     font-size: 14px;
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3);
-    transition: all 0.2s ease;
-    margin-top: 6px;
-  }
-  .line-link-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4);
-    background: #05b34c;
   }
 
-  /* POPUP MODAL */
   .overlay{
     position:fixed; inset:0; background:rgba(90, 74, 66, 0.35);
     backdrop-filter: blur(5px);
@@ -316,15 +293,12 @@
   .field label{display:block; font-size:13.5px; color:var(--ink-soft); margin-bottom:6px;}
   .field input, .field textarea{
     width:100%; padding:11px 14px; border:1.5px solid #FFCCD5; border-radius:14px;
-    font-family:inherit; font-size:14px; outline:none;
-    background: #FFFBFD; transition: border-color 0.2s;
+    font-family:inherit; font-size:14px; outline:none; background: #FFFBFD;
   }
-  .field input:focus, .field textarea:focus{border-color: #FF7B9C; background: #FFFFFF;}
   .field textarea{resize:vertical; min-height:85px;}
   .star-pick{display:flex; gap:8px; font-size:26px; cursor:pointer; color:#E2D9D5;}
   .star-pick span.active{color:#FFB703;}
 
-  /* เอฟเฟกต์หัวใจลอย */
   .heart-sparkle {
     position: fixed; pointer-events: none; font-size: 15px;
     animation: fadeAndFly 1s linear forwards; z-index: 9999;
@@ -363,7 +337,6 @@
 
 <div class="main-container">
 
-  <!-- โซนรีวิวหลัก -->
   <section class="wrap-section">
     <div class="section-head">
       <div>
@@ -376,25 +349,22 @@
       <button class="btn" id="openReviewBtn">✦ เพิ่มเครดิต</button>
     </div>
     
-    <div id="reviewGrid"></div>
+    <div id="reviewGrid">กำลังโหลดรีวิว...</div>
     <button class="load-more-btn" id="loadMoreBtn" style="display:none;">✨ ดูรีวิวเพิ่มเติม</button>
   </section>
 
-  <!-- โซนรูปปกเครดิตเก่าด้านล่างสุด (อัปเดตรูปภาพ + ลิงก์ใหม่) -->
   <section class="wrap-section" style="background: linear-gradient(180deg, rgba(255, 245, 248, 0.9) 0%, rgba(255, 230, 238, 0.85) 100%);">
     <div class="old-credit-box">
       <h3 style="color: #E07A5F; font-size: 18px;">• เครดิตไลน์เก่า / ประวัติร้าน •</h3>
       <p style="font-size: 13px; color: #8C736A; margin: 4px 0 10px;">ใครมาปั่นเครดิตเดี๋ยวหยิก 🤏</p>
       
-      <!-- แสดงรูปภาพเครดิตเก่าทั้ง 2 ภาพ -->
       <div class="old-credit-grid">
         <img class="old-credit-img" src="S__47308810.jpg" alt="รูปปกเครดิตเก่า 1">
         <img class="old-credit-img" src="S__47308812.jpg" alt="รูปปกเครดิตเก่า 2">
       </div>
       
       <div>
-        <!-- ลิงก์ใหม่ที่ส่งมา -->
-        <a class="line-link-btn" href="https://linevoom.line.me/post/1172097030041339303" target="_blank">
+        <a class="line-link-btn" href="https://linevoom.line.me/post/1166428808429267751" target="_blank">
           💚 ดูบอร์ดเครดิตเดิมบน Line Voom
         </a>
       </div>
@@ -403,7 +373,6 @@
 
 </div>
 
-<!-- กล่องป๊อปอัพเขียนรีวิว -->
 <div class="overlay" id="reviewOverlay">
   <div class="modal">
     <div class="modal-head">
@@ -437,12 +406,28 @@
 </footer>
 
 <script>
+  // ชุดข้อมูลเชื่อมต่อ Firebase ของคุณ
+  const firebaseConfig = {
+    apiKey: "AIzaSyCvGQ0xBtvJL4vlZsLlEnRxK-7mM0EAG20",
+    authDomain: "tfour-credit.firebaseapp.com",
+    databaseURL: "https://tfour-credit-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "tfour-credit",
+    storageBucket: "tfour-credit.firebasestorage.app",
+    messagingSenderId: "741580877981",
+    appId: "1:741580877981:web:89d3addfa74960d838e474",
+    measurementId: "G-YRDG6MLBFZ"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
   const ADMIN_PASS = "1234";
   const COOLDOWN_TIME = 10 * 60 * 1000;
   const PAGE_SIZE = 5;
 
   let visibleCount = PAGE_SIZE;
   let selectedStars = 5;
+  let reviewsList = [];
 
   const openBtn = document.getElementById('openReviewBtn');
   const closeBtn = document.getElementById('closeReviewBtn');
@@ -455,114 +440,84 @@
   const statAvg = document.getElementById('statAvg');
   const shopLikeBtn = document.getElementById('shopLikeBtn');
   const shopLikeCount = document.getElementById('shopLikeCount');
-  const shopHeartIcon = document.getElementById('shopHeartIcon');
 
-  let storeLikes = Number(localStorage.getItem('tfour_store_likes')) || 0;
-  let isStoreLiked = localStorage.getItem('tfour_store_liked_by_user') === 'true';
-
-  function updateShopLikeUI() {
-    shopLikeCount.textContent = storeLikes;
-    if (isStoreLiked) {
-      shopLikeBtn.classList.add('liked');
-      shopHeartIcon.textContent = '💖';
-    } else {
-      shopLikeBtn.classList.remove('liked');
-      shopHeartIcon.textContent = '♡';
-    }
-  }
-
-  shopLikeBtn.addEventListener('click', () => {
-    if (isStoreLiked) {
-      storeLikes = Math.max(0, storeLikes - 1);
-      isStoreLiked = false;
-      localStorage.setItem('tfour_store_liked_by_user', 'false');
-    } else {
-      storeLikes += 1;
-      isStoreLiked = true;
-      localStorage.setItem('tfour_store_liked_by_user', 'true');
-    }
-    localStorage.setItem('tfour_store_likes', storeLikes);
-    updateShopLikeUI();
+  db.ref('shopLikes').on('value', (snapshot) => {
+    const likes = snapshot.val() || 0;
+    shopLikeCount.textContent = likes;
   });
 
-  let reviews = JSON.parse(localStorage.getItem('tfour_reviews_v2')) || [
-    { 
-      id: 1, 
-      name: "ลูกค้า A", 
-      stars: 5, 
-      msg: "งานน่ารักมากเลยค่ะ แม่ค้าตอบไวมาก ไว้จะมาอุดหนุนอีกแน่นอนค่ะ ✨", 
-      time: "03/09/2026 14:30",
-      likes: 3 
+  shopLikeBtn.addEventListener('click', () => {
+    db.ref('shopLikes').transaction((currentLikes) => {
+      return (currentLikes || 0) + 1;
+    });
+  });
+
+  db.ref('reviews').on('value', (snapshot) => {
+    const data = snapshot.val();
+    reviewsList = [];
+    if (data) {
+      Object.keys(data).forEach((key) => {
+        reviewsList.push({ key: key, ...data[key] });
+      });
+      reviewsList.sort((a, b) => b.timestamp - a.timestamp);
     }
-  ];
+    renderReviews();
+  });
 
   function renderReviews() {
     reviewGrid.innerHTML = '';
-    const displayReviews = reviews.slice(0, visibleCount);
+    const displayReviews = reviewsList.slice(0, visibleCount);
 
-    displayReviews.forEach((rv, index) => {
+    if (displayReviews.length === 0) {
+      reviewGrid.innerHTML = '<div style="text-align:center; color:#8C736A; padding:20px;">ยังไม่มีรีวิว มาเป็นคนแรกกันเถอะ ✨</div>';
+    }
+
+    displayReviews.forEach((rv) => {
       const starStr = '★'.repeat(rv.stars);
       const card = document.createElement('div');
       card.className = 'review-card';
-
-      const likedKey = `liked_${rv.id}`;
-      const isLiked = localStorage.getItem(likedKey);
 
       card.innerHTML = `
         <div class="review-header">
           <div>
             <div class="review-user"><b>คุณ${rv.name}</b> <span style="color:#FFB703; margin-left:4px;">${starStr}</span></div>
-            <div class="review-time">🕒 ${rv.time || 'เมื่อนานมาแล้ว'}</div>
+            <div class="review-time">🕒 ${rv.time}</div>
           </div>
-          <button class="delete-btn" onclick="deleteReview(${index})" title="ลบรีวิว (แอดมิน)">🗑️</button>
+          <button class="delete-btn" onclick="deleteReview('${rv.key}')" title="ลบรีวิว (แอดมิน)">🗑️</button>
         </div>
         <div class="review-msg">${rv.msg}</div>
         <div class="review-footer">
-          <button class="like-btn ${isLiked ? 'liked' : ''}" onclick="toggleLike(${index})">
-            <span>${isLiked ? '💖' : '♡'}</span> ถูกใจ (<b id="like-count-${index}">${rv.likes || 0}</b>)
+          <button class="like-btn" onclick="toggleLike('${rv.key}', ${rv.likes || 0})">
+            <span>💖</span> ถูกใจ (<b>${rv.likes || 0}</b>)
           </button>
         </div>
       `;
       reviewGrid.appendChild(card);
     });
 
-    if (reviews.length > visibleCount) {
+    if (reviewsList.length > visibleCount) {
       loadMoreBtn.style.display = 'block';
     } else {
       loadMoreBtn.style.display = 'none';
     }
 
-    statCount.textContent = reviews.length;
-    if (reviews.length > 0) {
-      const totalStars = reviews.reduce((sum, r) => sum + r.stars, 0);
-      statAvg.textContent = (totalStars / reviews.length).toFixed(1);
+    statCount.textContent = reviewsList.length;
+    if (reviewsList.length > 0) {
+      const totalStars = reviewsList.reduce((sum, r) => sum + r.stars, 0);
+      statAvg.textContent = (totalStars / reviewsList.length).toFixed(1);
     } else {
       statAvg.textContent = "5.0";
     }
-
-    localStorage.setItem('tfour_reviews_v2', JSON.stringify(reviews));
   }
 
-  function toggleLike(index) {
-    const rv = reviews[index];
-    const likedKey = `liked_${rv.id}`;
-    const isLiked = localStorage.getItem(likedKey);
-
-    if (isLiked) {
-      rv.likes = Math.max(0, (rv.likes || 1) - 1);
-      localStorage.removeItem(likedKey);
-    } else {
-      rv.likes = (rv.likes || 0) + 1;
-      localStorage.setItem(likedKey, 'true');
-    }
-    renderReviews();
+  function toggleLike(key, currentLikes) {
+    db.ref('reviews/' + key + '/likes').set(currentLikes + 1);
   }
 
-  function deleteReview(index) {
+  function deleteReview(key) {
     const password = prompt("กรุณาใส่รหัสผ่านแอดมินเพื่อลบรีวิวนี้:");
     if (password === ADMIN_PASS) {
-      reviews.splice(index, 1);
-      renderReviews();
+      db.ref('reviews/' + key).remove();
       alert("ลบรีวิวเรียบร้อยแล้วค่ะ");
     } else if (password !== null) {
       alert("รหัสผ่านไม่ถูกต้อง!");
@@ -576,9 +531,6 @@
 
   openBtn.addEventListener('click', () => overlay.classList.add('open'));
   closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.addEventListener('click', (e) => {
-    if(e.target === overlay) overlay.classList.remove('open');
-  });
 
   starPick.addEventListener('click', (e) => {
     if(e.target.dataset.v) {
@@ -598,8 +550,7 @@
     if (lastPostTime && (now - lastPostTime < COOLDOWN_TIME)) {
       const remainingDiff = COOLDOWN_TIME - (now - lastPostTime);
       const remainingMin = Math.floor(remainingDiff / 60000);
-      const remainingSec = Math.ceil((remainingDiff % 60000) / 1000);
-      alert(`คุณส่งรีวิวเร็วเกินไปน้า กรุณารออีก ${remainingMin} นาที ${remainingSec} วินาทีค่ะ 🌸`);
+      alert(`คุณส่งรีวิวเร็วเกินไปน้า กรุณารออีก ${remainingMin} นาทีค่ะ 🌸`);
       return;
     }
 
@@ -615,18 +566,16 @@
     const dateStr = dateObj.toLocaleDateString('th-TH', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const timeStr = dateObj.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
 
-    reviews.unshift({ 
-      id: Date.now(),
-      name: name, 
-      stars: selectedStars, 
+    db.ref('reviews').push({
+      name: name,
+      stars: selectedStars,
       msg: msg,
       time: `${dateStr} ${timeStr}`,
-      likes: 0 
+      timestamp: now,
+      likes: 0
     });
 
     localStorage.setItem('last_review_time', now);
-    renderReviews();
-
     document.getElementById('rvName').value = '';
     document.getElementById('rvMsg').value = '';
     overlay.classList.remove('open');
@@ -646,9 +595,6 @@
       lastSparkle = now;
     }
   });
-
-  updateShopLikeUI();
-  renderReviews();
 </script>
 
 </body>
