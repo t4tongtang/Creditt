@@ -14,11 +14,11 @@
 
   :root{
     --paper: #FFFDF9;
-    --ink: #5C4A42;               /* สีน้ำตาลอุ่น / ชานม */
-    --ink-soft: #8C756B;          /* สีชานมอ่อน */
-    --peach-main: #FF9E79;        /* สีส้มพีชหลัก */
-    --peach-soft: #FFEADF;        /* สีครีมพีขอ่อน */
-    --peach-border: #FFD2C1;      /* เส้นขอบสีพีช */
+    --ink: #5C4A42;
+    --ink-soft: #8C756B;
+    --peach-main: #FF9E79;
+    --peach-soft: #FFEADF;
+    --peach-border: #FFD2C1;
     --card-bg: rgba(255, 255, 255, 0.92);
     --white: #FFFFFF;
   }
@@ -28,7 +28,7 @@
   
   body{
     margin:0;
-    background-color: #FFF6F0; /* พื้นหลังสีครีมส้มพีช */
+    background-color: #FFF6F0;
     background-image: 
       linear-gradient(rgba(255, 176, 136, 0.2) 1.5px, transparent 1.5px),
       linear-gradient(90deg, rgba(255, 176, 136, 0.2) 1.5px, transparent 1.5px);
@@ -39,9 +39,7 @@
     overflow-x: hidden;
   }
 
-  /* ==============================================
-     🌸 Floating Background Container & Animation
-     ============================================== */
+  /* 🌸 Floating Background Container & Animation */
   .floating-bg-container {
     position: fixed;
     top: 0;
@@ -62,24 +60,12 @@
   }
 
   @keyframes floatUp {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0;
-    }
-    10% {
-      opacity: 0.35;
-    }
-    85% {
-      opacity: 0.35;
-    }
-    100% {
-      transform: translateY(-135vh) rotate(20deg);
-      opacity: 0;
-    }
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.35; }
+    85% { opacity: 0.35; }
+    100% { transform: translateY(-135vh) rotate(20deg); opacity: 0; }
   }
 
-  /* ============================================== */
-  
   h1,h2,h3, .brand{
     font-family:'Chonburi', 'Mali', cursive;
     font-weight:400;
@@ -137,16 +123,23 @@
     letter-spacing: 0.5px;
     text-shadow: 2px 2px 0px #FFF, 0 0 12px rgba(224, 122, 95, 0.25);
   }
+
+  /* 🎀 ข้อความไร้กรอบ 🎀 */
   .hero-tag{
-    margin-top:8px; color:var(--ink-soft); font-size:15px; 
-    max-width:55ch; margin-left:auto; margin-right:auto; 
+    margin-top:10px; 
+    color:var(--ink-soft); 
+    font-size:15px; 
+    max-width:55ch; 
+    margin-left:auto; 
+    margin-right:auto; 
     word-break: break-word;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 8px 18px;
-    border-radius: 20px;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
     display: inline-block;
-    border: 1.5px dashed var(--peach-border);
-    box-shadow: 0 4px 10px rgba(255, 176, 136, 0.12);
+    border: none;
+    box-shadow: none;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
   }
   
   .hero-stats{
@@ -682,7 +675,7 @@
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  const ADMIN_PASS = "5135";
+  const ADMIN_PASS = "1234";
   const COOLDOWN_TIME = 10 * 60 * 1000;
   const PAGE_SIZE = 5;
 
